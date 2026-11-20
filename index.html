@@ -1,0 +1,1675 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Work sample by Narissara Khomkhai for the Faculty Affairs Manager role, Department of Medicine, Boston University Chobanian & Avedisian School of Medicine. Faculty affairs operations tracker with explainable forecasts, using synthetic data.">
+<link rel="icon" href="data:,">
+<title>Faculty Affairs Operations Tracker · Work sample · Narissara Khomkhai</title>
+<style>
+
+:root{--bg:#f7f6f3;--paper:#fff;--ink:#1f2a30;--muted:#56626a;--line:#dfe1de;--soft:#f0f1ee;--accent:#9c1f2e;--accent-dk:#7a1622;--pale:#f7e9eb;--slate:#4a6675;--slate-pale:#e3ebef;--gold:#a5762a;--gold-pale:#f7efdf;--green:#2f6f4f;--green-pale:#e3f1e8;--amber:#9a5b0a;--amber-pale:#fbf0dc;--serif:Cambria,Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.55 var(--serif);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p{margin:0}h1,h2,h3{line-height:1.15}
+a{color:var(--accent);text-underline-offset:3px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{width:min(1200px,100% - 48px);margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+
+/* Header */
+.head{background:var(--paper);border-bottom:1px solid var(--line)}
+.head .wrap{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;padding:24px 0 18px}
+.head h1{font-size:34px;margin:6px 0 4px;letter-spacing:-.01em}
+.head .for{font-size:16px;color:var(--muted)}
+.head .who{text-align:right;font-size:14.5px}
+.head .who strong{display:block;font-size:17px}
+.asof{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:2px 8px;border-radius:3px}
+
+/* Tabs (index) */
+.tabs{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tab{border:0;background:none;padding:14px 11px 12px;font-size:14.5px;font-weight:700;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap}
+.tab small{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:6px;padding:0 5px;border-radius:10px;background:var(--soft);font-size:11.5px;color:var(--muted)}
+.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab[aria-selected=true] small{background:var(--accent);color:#fff}
+.panel{display:none;padding:26px 0 10px}.panel.on{display:block}
+.ph{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:16px}
+.ph h2{font-size:27px}.ph>p{font-size:14.5px;color:var(--muted);max-width:52ch;text-align:right}
+
+/* Cards and grids */
+.card{background:var(--paper);border:1px solid var(--line);padding:18px}
+.card h3{font-size:19px;margin-bottom:10px}
+.card .sub{font-size:13.5px;color:var(--muted);margin:-6px 0 12px}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.g12{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+.mt{margin-top:16px}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--accent);padding:12px 14px;text-align:left;border-radius:0}
+.kpi:hover{border-color:var(--accent)}
+.kpi strong{display:block;font-size:32px;line-height:1.05;color:var(--accent)}
+.kpi span{display:block;font-size:14px;font-weight:700}
+.kpi small{display:block;font-size:12.5px;color:var(--muted)}
+.kpi.warn{border-top-color:var(--amber)}.kpi.warn strong{color:var(--amber)}
+
+/* Deadline strip */
+.dl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;position:relative;margin-top:6px}
+.dl::before{content:'';position:absolute;left:0;right:0;top:13px;border-top:2px solid var(--line)}
+.dl div{position:relative;padding:30px 10px 0 0}
+.dl div::before{content:'';position:absolute;top:6px;left:0;width:16px;height:16px;border-radius:50%;background:var(--paper);border:3px solid var(--slate)}
+.dl div.hot::before{border-color:var(--accent);background:var(--accent)}
+.dl b{display:block;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.dl strong{display:block;font-size:16px;line-height:1.25}
+.dl span{display:block;font-size:13px;color:var(--muted)}
+.dl em{display:inline-block;font-style:normal;font-size:12.5px;font-weight:700;color:var(--accent);margin-top:3px}
+
+/* Action list */
+.actions{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.actions li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;padding:9px 10px;background:var(--soft);border-left:3px solid var(--amber);font-size:14.5px}
+.actions li.ok{border-left-color:var(--green)}
+.actions .due{font-size:12.5px;font-weight:700;color:var(--amber);white-space:nowrap}
+.actions li.ok .due{color:var(--green)}
+.linkbtn{border:0;background:none;padding:0;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px;font-size:14px}
+
+/* Stage chart */
+.stagebar{display:grid;gap:7px}
+.srow{display:grid;grid-template-columns:150px 1fr 26px;gap:10px;align-items:center;font-size:14px}
+.strack{height:20px;background:var(--soft);border-radius:3px;overflow:hidden}
+.strack i{display:block;height:100%;background:var(--slate)}
+.srow b{text-align:right}
+
+/* Proof */
+.proof{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.proof li{display:grid;grid-template-columns:110px 1fr;gap:12px;font-size:14.5px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.proof li:last-child{border-bottom:0;padding-bottom:0}
+.proof b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.metric-inline{font-weight:700;color:var(--accent)}
+
+/* Kanban */
+.board{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:10px;overflow-x:auto;padding-bottom:6px}
+.col{background:var(--soft);border-radius:4px;padding:8px;min-width:150px}
+.col h4{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin:2px 2px 8px}
+.dcard{display:block;width:100%;text-align:left;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--slate);border-radius:3px;padding:8px 9px;margin-bottom:8px;font-size:13px;line-height:1.35}
+.dcard:hover{border-color:var(--accent)}
+.dcard.flag{border-left-color:var(--amber)}
+.dcard strong{display:block;font-size:14px}
+.dcard .sec{color:var(--muted);display:block}
+.dcard .meta{display:flex;justify-content:space-between;gap:6px;margin-top:6px;font-size:12px}
+.pilltype{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 6px;border-radius:9px;background:var(--slate-pale);color:var(--slate)}
+.pilltype.u{background:var(--pale);color:var(--accent)}
+.pilltype.s{background:var(--gold-pale);color:var(--gold)}
+.lettermeter{display:flex;gap:2px;margin-top:6px}
+.lettermeter i{flex:1;height:6px;border-radius:2px;background:var(--line)}
+.lettermeter i.on{background:var(--green)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* Table */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.scroll{overflow-x:auto;position:relative}
+.st{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:10px}
+.st.pass{background:var(--green-pale);color:var(--green)}.st.flag{background:var(--amber-pale);color:var(--amber)}
+.def{border:0;border-bottom:1px dashed currentColor;background:none;padding:0;cursor:help}
+
+/* Gantt */
+.gantt{position:relative}
+.gmonths{display:grid;grid-template-columns:230px 1fr;gap:12px;font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.gmonths div{display:grid;grid-template-columns:repeat(8,1fr)}
+.gmonths span{border-left:1px solid var(--line);padding-left:4px}
+.grow{display:grid;grid-template-columns:230px 1fr;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.grow .lab{text-align:left;border:0;background:none;padding:0}
+.grow .lab strong{display:block;font-size:14.5px}.grow .lab small{display:block;font-size:12.5px;color:var(--muted)}
+.gtr{position:relative;height:34px}
+.gtr .ph1{position:absolute;top:11px;height:12px;border-radius:2px}
+.gtr .ms{position:absolute;top:8px;width:12px;height:12px;transform:translateX(-50%) rotate(45deg);background:var(--paper);border:2px solid var(--ink)}
+.gtr .ms.done{background:var(--ink)}
+.today{position:absolute;top:0;bottom:0;border-left:2px solid var(--accent);z-index:2}
+.today span{position:absolute;bottom:-20px;left:4px;font-size:12px;font-weight:700;color:var(--accent);white-space:nowrap}
+.funnel{display:grid;gap:5px}
+.frow{display:grid;grid-template-columns:110px 1fr 34px;gap:8px;align-items:center;font-size:13.5px}
+.frow i{display:block;height:16px;background:var(--slate);border-radius:2px}
+.frow b{text-align:right}
+
+/* Onboarding matrix */
+.onb th,.onb td{text-align:center}.onb th:first-child,.onb td:first-child{text-align:left}
+.dot{display:inline-block;width:16px;height:16px;border-radius:50%;vertical-align:middle}
+.dot.d{background:var(--green)}.dot.p{background:var(--paper);border:3px solid var(--amber)}.dot.n{background:var(--paper);border:2px solid var(--line)}.dot.x{background:var(--soft);position:relative}
+.dot.x::after{content:'–';position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:var(--muted);line-height:16px;text-align:center}
+
+/* Bars */
+.hbar{display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center;margin:7px 0;font-size:14px}
+.hbar .t{display:flex;height:22px;border-radius:3px;overflow:hidden;background:var(--soft)}
+.hbar .t span{display:block;height:100%}
+.hbar b{text-align:right}
+.c-u{background:var(--accent)}.c-c{background:var(--slate)}.c-r{background:var(--gold)}
+.s1{background:#9fb3bd}.s2{background:var(--accent)}.s3{background:var(--gold)}.s4{background:var(--slate)}.s5{background:#c7b29a}
+.vbars{display:flex;align-items:flex-end;gap:12px;height:170px;border-bottom:1px solid var(--muted);padding:0 4px}
+.vbars div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.vbars i{display:block;width:100%;max-width:56px;background:var(--slate);border-radius:3px 3px 0 0}
+.vbars b{font-size:13px;margin-bottom:3px}
+.vlabels{display:flex;gap:12px;padding:4px 4px 0;font-size:12.5px;color:var(--muted)}
+.vlabels span{flex:1;text-align:center}
+
+/* Calendar */
+.cyc{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.cyc div{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--slate);padding:12px}
+.cyc div.now{border-top-color:var(--accent)}
+.cyc div.past{opacity:.65}
+.cyc b{display:block;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cyc dl{display:grid;grid-template-columns:auto 1fr;gap:3px 8px;font-size:13px;margin:8px 0 0}
+.cyc dt{color:var(--muted)}.cyc dd{margin:0;font-weight:700}
+.cyc .tagnow{display:inline-block;margin-top:8px;font-size:12px;font-weight:700;color:var(--accent)}
+.workback{position:relative;margin-top:8px}
+.wb{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0}
+.wb div{position:relative;padding:28px 10px 0 0;font-size:13.5px}
+.wb div::before{content:'';position:absolute;top:8px;left:0;right:0;height:6px;background:var(--slate-pale)}
+.wb div:last-child::before{background:var(--accent)}
+.wb div::after{content:'';position:absolute;top:4px;left:0;width:14px;height:14px;border-radius:50%;background:var(--slate)}
+.wb div:last-child::after{background:var(--accent)}
+.wb b{display:block;font-size:13px;color:var(--accent)}
+
+/* Dialog */
+dialog{width:min(620px,94vw);max-height:88vh;border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:6px;padding:22px 24px;background:var(--paper);color:var(--ink)}
+dialog::backdrop{background:rgba(20,26,30,.6)}
+dialog h3{font-size:22px;margin:4px 0 4px}
+dialog .close{float:right;border:1px solid var(--line);background:var(--paper);border-radius:4px;padding:4px 10px;font-size:13px}
+dialog .chk{list-style:none;padding:0;margin:12px 0;display:grid;gap:6px}
+dialog .chk li{display:grid;grid-template-columns:22px 1fr;font-size:14.5px}
+dialog .chk li::before{content:'✓';color:var(--green);font-weight:700}
+dialog .chk li.no::before{content:'!';color:var(--amber)}
+dialog dl{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;font-size:14.5px;margin:10px 0}
+dialog dt{color:var(--muted);font-weight:700}dialog dd{margin:0}
+dialog .next{background:var(--soft);border-left:3px solid var(--accent);padding:10px 12px;font-size:14.5px;margin-top:10px}
+
+.foot{margin:34px 0 0;padding:18px 0 28px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.g12,.g3{grid-template-columns:1fr}.cyc{grid-template-columns:repeat(3,minmax(0,1fr))}.gmonths,.grow{grid-template-columns:170px 1fr}}
+@media(max-width:700px){
+ .wrap{width:calc(100% - 28px)}
+ .head .wrap{grid-template-columns:1fr}.head .who{text-align:left}.head h1{font-size:27px}
+ .ph{display:block}.ph>p{text-align:left;margin-top:6px}
+ .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .g2{grid-template-columns:1fr}
+ .dl{grid-template-columns:1fr;gap:12px}.dl::before{left:7px;right:auto;top:6px;bottom:6px;border-top:0;border-left:2px solid var(--line)}.dl div{padding:0 0 0 28px}.dl div::before{top:3px}
+ .srow{grid-template-columns:110px 1fr 22px}
+ .proof li{grid-template-columns:1fr;gap:2px}.actions li{grid-template-columns:1fr;gap:2px}.actions li .linkbtn{justify-self:start;text-align:left}
+ .gmonths,.grow{grid-template-columns:1fr}.gmonths>span{display:none}
+ .cyc{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .wb{grid-template-columns:1fr;gap:10px}.wb div{padding:0 0 0 24px}.wb div::before{display:none}.wb div::after{top:4px}
+ .hbar{grid-template-columns:90px 1fr 40px}
+ dialog dl{grid-template-columns:1fr;gap:0 0}dialog dt{margin-top:6px}
+}
+@media print{
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ body{background:#fff;font-size:10.5pt}.tabs{display:none}.panel{display:block!important;break-before:page;padding-top:8px}.panel:first-of-type{break-before:auto}
+ .board{grid-template-columns:repeat(7,1fr);overflow:visible}.col{min-width:0}
+ .card,.kpi,.cyc div{break-inside:avoid}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ---- v2 additions ---- */
+:root{--red:#b42318;--red-pale:#fde8e6;--neutral:#d6c4cb}
+.takeaways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.tk{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);padding:12px 14px;font-size:14.5px;text-align:left}
+.tk b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.tk strong{font-size:18px}
+.tk.amber{border-left-color:var(--amber)}.tk.amber b{color:var(--amber)}
+.tk.slate{border-left-color:var(--slate)}.tk.slate b{color:var(--slate)}
+.chart svg{display:block;width:100%;height:auto}
+.chart text{font-family:var(--serif);fill:var(--ink)}
+.chart .ax{stroke:var(--muted);stroke-width:1}
+.chart .gr{stroke:var(--line);stroke-width:1}
+.chart .lbl{fill:var(--muted);font-size:12px}
+.chart [data-open]{cursor:pointer}
+.chart [data-open]:hover circle{stroke:var(--ink);stroke-width:2}
+.colhead small{display:block;font-size:11.5px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted);margin-top:2px}
+.clock{height:5px;background:var(--line);border-radius:3px;margin-top:6px;overflow:hidden}
+.clock i{display:block;height:100%;background:var(--green)}
+.clock i.w{background:var(--amber)}.clock i.r{background:var(--red)}
+.clocktxt{font-size:11.5px;color:var(--muted);margin-top:2px}
+.dcard.over{border-left-color:var(--red)}
+.ladder{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;align-items:end}
+.rung{background:var(--paper);border:1px solid var(--line);padding:10px 12px;border-top:4px solid var(--slate)}
+.rung b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rung strong{display:block;font-size:15px;line-height:1.25;margin:3px 0}
+.rung span{display:block;font-size:13px;color:var(--muted)}
+.rung em{display:inline-block;font-style:normal;margin-top:6px;font-size:12.5px;font-weight:700;padding:1px 8px;border-radius:9px;background:var(--soft)}
+.rung.r0{border-top-color:#8aa3b0;min-height:120px}.rung.r1{border-top-color:var(--amber);min-height:140px}.rung.r2{border-top-color:#c2410c;min-height:160px}.rung.r3{border-top-color:var(--accent);min-height:180px}.rung.r4{border-top-color:#5b0f18;min-height:200px}
+.rung em.hot{background:var(--amber-pale);color:var(--amber)}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin-top:8px}
+.flow span{position:relative;background:var(--soft);padding:6px 18px 6px 12px;font-size:13px;margin:0 8px 6px 0;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,0 100%)}
+.flow span small{display:block;color:var(--muted);font-size:11.5px}
+.donutwrap{display:grid;grid-template-columns:170px 1fr;gap:14px;align-items:center}
+.klist{list-style:none;padding:0;margin:0;display:grid;gap:5px;font-size:14px}
+.klist li{display:grid;grid-template-columns:14px 1fr auto;gap:8px;align-items:center}
+.klist i{width:12px;height:12px;border-radius:2px}
+.prob{display:grid;grid-template-columns:200px 1fr 52px;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.prob:last-child{border-bottom:0}
+.prob .bar{height:16px;background:var(--soft);border-radius:3px;position:relative}
+.prob .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:3px}
+.prob .bar u{position:absolute;top:-3px;bottom:-3px;left:50%;border-left:1px dashed var(--muted)}
+.prob b{text-align:right}
+.prob button{text-align:left;border:0;background:none;padding:0}
+.prob button strong{display:block;font-size:14px}.prob button small{display:block;font-size:12.5px;color:var(--muted)}
+.modelcard{font-size:13.5px;color:var(--muted);background:var(--soft);padding:10px 12px;margin-top:12px;border-left:3px solid var(--slate)}
+.modelcard b{color:var(--ink)}
+.rai{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--green);padding:12px 14px;font-size:14.5px;margin-bottom:16px}
+.rai b{color:var(--green)}
+.cvrules{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px;font-size:14px}
+.cvrules li{display:grid;grid-template-columns:20px 1fr}
+.cvrules li::before{content:'✓';color:var(--green);font-weight:700}
+.contrib{display:grid;grid-template-columns:170px 1fr 54px;gap:8px;align-items:center;font-size:14px;margin:5px 0}
+.contrib .z{position:relative;height:14px;background:var(--soft)}
+.contrib .z::before{content:'';position:absolute;left:50%;top:-3px;bottom:-3px;border-left:1px solid var(--muted)}
+.contrib .z i{position:absolute;top:0;bottom:0}
+@media(max-width:1000px){.takeaways{grid-template-columns:1fr}.ladder{grid-template-columns:repeat(3,minmax(0,1fr))}.prob{grid-template-columns:150px 1fr 48px}}
+@media(max-width:700px){.ladder{grid-template-columns:1fr}.rung{min-height:0!important}.donutwrap{grid-template-columns:1fr}.cvrules{grid-template-columns:1fr}.prob{grid-template-columns:1fr 52px}.prob .bar{grid-column:1/-1;grid-row:2}.contrib{grid-template-columns:120px 1fr 46px}}
+.g12>*,.g2>*,.g3>*{min-width:0}
+/* ---- v3 additions ---- */
+.dutymap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.duty{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start;text-align:left;background:var(--soft);border:1px solid transparent;border-left:3px solid var(--accent);padding:8px 10px;font-size:13.5px;line-height:1.35}
+.duty:hover{border-color:var(--accent);background:var(--paper)}
+.duty b{font-size:15px;color:var(--accent)}
+.duty small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.mini{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px;font-size:14px}
+.mini li{position:relative;padding-left:16px}
+.mini li::before{content:'';position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+#decide li::before{background:var(--green)}
+.chg{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.chg:last-child{border-bottom:0}
+.chg b{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+.chg .st{margin-left:6px}
+.itin{position:relative;padding-left:18px;border-left:2px solid var(--line);display:grid;gap:8px}
+.itin div{position:relative;display:grid;grid-template-columns:96px 1fr;gap:10px;font-size:14px}
+.itin div::before{content:'';position:absolute;left:-25px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:3px solid var(--slate)}
+.itin div.key::before{border-color:var(--accent);background:var(--accent)}
+.itin b{font-size:13px}
+.itin small{display:block;color:var(--muted);font-size:12.5px}
+.logi td,.logi th{text-align:center}.logi td:first-child,.logi th:first-child{text-align:left}
+.ok{color:var(--green);font-weight:700}.no{color:var(--amber);font-weight:700}
+.pill-p,.pill-b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:700}
+.pill-p{background:var(--accent);color:#fff}.pill-b{border:1.5px solid var(--slate);color:var(--slate)}
+.letterrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.letterrow:last-child{border-bottom:0}
+.letterrow small{display:block;color:var(--muted);font-size:12.5px}
+.draft{white-space:pre-wrap;background:var(--soft);padding:12px 14px;font-size:14.5px;line-height:1.55;border-left:3px solid var(--slate);margin-top:10px}
+.gauge{display:grid;grid-template-columns:150px 1fr 54px;gap:10px;align-items:center;font-size:14px;margin:7px 0}
+.gauge .t{height:12px;background:var(--soft);border-radius:6px;overflow:hidden}.gauge .t i{display:block;height:100%;border-radius:6px}
+.gauge b{text-align:right}
+.proj{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.proj:last-child{border-bottom:0}
+.proj .top{display:flex;justify-content:space-between;gap:10px}
+.proj small{color:var(--muted);font-size:12.5px}
+.proj .t{height:8px;background:var(--soft);border-radius:4px;margin-top:6px;overflow:hidden}.proj .t i{display:block;height:100%;background:var(--slate)}
+@media(max-width:1000px){.dutymap{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.dutymap{grid-template-columns:1fr}.itin div{grid-template-columns:72px 1fr}.chg{grid-template-columns:1fr}.gauge{grid-template-columns:110px 1fr 46px}}
+
+.abs-row{display:grid;grid-template-columns:210px 1fr;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.abs-row:last-child{border-bottom:0}
+.abs-row b{display:block;font-size:14px}.abs-row small{display:block;font-size:12.5px;color:var(--muted);line-height:1.35}
+.abs-head{padding:0 0 18px;border-bottom:0}
+.abs-t{position:relative;height:22px}
+.abs-head .abs-t span{position:absolute;top:0;font-size:12px;color:var(--muted);white-space:nowrap;transform:translateX(-2px)}
+.abs-head .abs-t span:last-child{transform:translateX(-100%)}
+.abs-t .wk{position:absolute;top:-8px;bottom:-8px;border-left:1px solid var(--line)}
+.abs-t .dl{position:absolute;top:-8px;bottom:-8px;border-left:2px dashed var(--accent)}
+.abs-t .bar{position:absolute;top:4px;height:14px;border-radius:3px}
+@media(max-width:700px){.abs-row{grid-template-columns:1fr}.abs-head>span{display:none}}
+
+/* ---- v4 groups ---- */
+.tab .gn{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--pale);color:var(--accent);font-size:11.5px;margin-right:6px}
+.tab[aria-selected=true] .gn{background:var(--accent);color:#fff}
+.peers{font-size:13.5px;color:var(--muted);background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--slate);padding:8px 12px;margin:-4px 0 16px}
+.peers b{color:var(--ink)}
+.grp{font-size:22px;margin:30px 0 12px;padding-top:14px;border-top:1px solid var(--line)}
+.dgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.dgroup{display:grid;gap:6px;align-content:start}
+.dghead{display:flex;align-items:center;gap:8px;border:0;background:none;padding:2px 0;font-size:15px;font-weight:700;text-align:left}
+.dghead b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:12.5px}
+.dgroup .duty{grid-template-columns:1fr}
+.peer th,.peer td{font-size:13.5px}.peer tbody th{white-space:nowrap}
+.prog{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.prog:last-of-type{border-bottom:0}
+.prog .top{display:flex;justify-content:space-between;gap:10px}
+.prog .top span{font-weight:700}
+.prog small{color:var(--muted);font-size:12.5px}
+.prog .t{height:9px;background:var(--soft);border-radius:4px;margin-top:6px;overflow:hidden}.prog .t i{display:block;height:100%;background:var(--slate)}
+.chips2{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.chips2 span{font-size:12px;background:var(--pale);color:var(--accent);padding:2px 8px;border-radius:10px}
+.comm{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.comm div{background:var(--soft);padding:10px;border-top:3px solid var(--slate);font-size:13px}
+.comm b{display:block;font-size:12.5px;color:var(--accent)}
+.comm strong{display:block;font-size:14px;line-height:1.25;margin:3px 0}
+.comm span{color:var(--muted)}
+@media(max-width:1000px){.dgroups{grid-template-columns:repeat(2,minmax(0,1fr))}.comm{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.dgroups{grid-template-columns:1fr}.comm{grid-template-columns:1fr}}
+
+/* ---- v5 sub-index and evidence popups ---- */
+.subnav{position:sticky;top:var(--tabs-h,52px);z-index:9;display:flex;gap:6px;flex-wrap:wrap;background:var(--bg);padding:8px 0 10px;margin:0 0 14px;border-bottom:1px solid var(--line)}
+.subnav button{border:1px solid var(--line);background:var(--paper);border-radius:16px;padding:5px 13px;font-size:13.5px;color:var(--muted)}
+.subnav button:hover{border-color:var(--accent);color:var(--ink)}
+.subnav button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+#overview .subnav{margin-top:2px}
+dialog.wide{width:min(1060px,95vw)}
+.evidence{display:grid;gap:14px;margin-top:12px}
+.evidence .card{box-shadow:none}
+.evidence .board{grid-template-columns:repeat(7,minmax(130px,1fr))}
+[hidden]{display:none!important}
+@media print{.subnav{display:none}.panel>[data-sub][hidden]{display:block!important}}
+@media(max-width:700px){.subnav{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.subnav button{flex-shrink:0}}
+
+/* ---- v6 ---- */
+.score{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sc{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;gap:2px 10px;text-align:left;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--green);padding:10px 12px}
+.sc.warn{border-left-color:var(--amber)}
+.sc:hover{border-color:var(--accent)}
+.sc-n{grid-column:1/-1;font-size:13.5px;font-weight:700}
+.sc strong{font-size:26px;line-height:1.1;color:var(--ink)}
+.sc svg{grid-row:2/4;grid-column:2;align-self:center}
+.sc-t{font-size:12.5px;color:var(--muted)}
+.sc em{grid-column:1/-1;font-style:normal;font-size:12px;font-weight:700;color:var(--green)}
+.sc.warn em{color:var(--amber)}
+.wheelwrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:start}
+.wheelwrap svg{max-width:600px;margin:0 auto}
+.wheelwrap [data-open]{cursor:pointer}.wheelwrap path[data-open]:hover{opacity:1;stroke:var(--ink);stroke-width:1.5}
+.next90{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:4px}
+.next90 button{display:grid;grid-template-columns:12px 52px 1fr;gap:8px;align-items:center;width:100%;text-align:left;border:0;background:var(--soft);padding:6px 8px;font-size:13.5px}
+.next90 button:hover{background:var(--pale)}
+.next90 i{width:10px;height:10px;border-radius:50%}
+.next90 b{font-size:12.5px}
+.life{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:s}
+.lstep{position:relative;text-align:left;background:var(--soft);border:1px solid transparent;border-top:3px solid var(--accent);padding:10px 12px 12px}
+.lstep:hover{border-color:var(--accent);background:var(--paper)}
+.lstep b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px}
+.lstep strong{display:block;font-size:16px;margin:6px 0 2px}
+.lstep span{display:block;font-size:13px}
+.lstep small{display:block;font-size:12.5px;color:var(--muted)}
+.lstep:not(:nth-child(4n))::after{content:'→';position:absolute;right:-9px;top:44%;color:var(--accent);font-weight:700;z-index:1}
+.lifebase{display:block;width:100%;margin-top:10px;text-align:center;border:1px dashed var(--slate);background:var(--slate-pale);padding:8px;font-size:13.5px;color:var(--ink)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.facts div{border-top:3px solid var(--accent);padding-top:6px}
+.facts strong{display:block;font-size:28px;line-height:1.1;color:var(--accent)}
+.facts span{font-size:13px;color:var(--muted)}
+.mission{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}.mission:last-child{border-bottom:0}
+.mission b{display:block;color:var(--accent)}
+.rowbtn{cursor:pointer}.rowbtn:hover{background:var(--soft)}
+.ptl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:10px}
+.ptl div{position:relative;padding:22px 8px 0 0;font-size:13px}
+.ptl div::before{content:'';position:absolute;top:6px;left:0;right:0;height:4px;background:var(--line)}
+.ptl div::after{content:'';position:absolute;top:2px;left:0;width:12px;height:12px;border-radius:50%;background:var(--slate)}
+.ptl div.on::after{background:var(--accent)}
+.ptl b{display:block}.ptl span{color:var(--muted)}
+@media(max-width:1000px){.score{grid-template-columns:repeat(2,minmax(0,1fr))}.wheelwrap{grid-template-columns:1fr}.life{grid-template-columns:repeat(2,minmax(0,1fr))}.lstep::after{display:none}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.score{grid-template-columns:1fr}.life{grid-template-columns:1fr}.ptl{grid-template-columns:1fr 1fr;gap:8px}}
+
+#records th,#records td:nth-child(4),#records td:nth-child(5){white-space:nowrap}
+
+/* ---- v7 header sub-index ---- */
+.subbar{background:var(--soft);border-top:1px solid var(--line)}
+.subbar .subnav{position:static;margin:0;padding:7px 0;border:0;background:none;align-items:center}
+.sublab{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-right:6px;white-space:nowrap}
+.subnav button b{font-size:11.5px;margin-right:6px;opacity:.75}
+.subnav button[aria-selected=true] b{opacity:1}
+.index-btn{margin-left:auto;align-self:center;border:1px solid var(--line);background:var(--paper);border-radius:4px;padding:6px 12px;font-size:13.5px;font-weight:700;white-space:nowrap}
+.index-btn:hover{border-color:var(--accent);color:var(--accent)}
+.ixgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:12px}
+.ixh{border:0;background:none;padding:0;font-size:16px;font-weight:700;text-align:left;display:flex;gap:8px;align-items:center}
+.ixh b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px}
+.ixg ol{list-style:none;padding:0;margin:6px 0 0;display:grid;gap:2px}
+.ixg ol button{display:grid;grid-template-columns:34px 1fr;width:100%;text-align:left;border:0;background:none;padding:4px 6px;font-size:14px;border-radius:3px}
+.ixg ol button:hover{background:var(--pale)}
+.ixg ol span{color:var(--accent);font-weight:700;font-size:12.5px}
+@media(max-width:1000px){.ixgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.ixgrid{grid-template-columns:1fr}.subbar .subnav{flex-wrap:nowrap;overflow-x:auto}.sublab{display:none}}
+@media print{.subbar,.index-btn{display:none}}
+
+.sbw{display:flex;align-items:center;gap:10px}#subbar{flex:1;min-width:0}
+.sbw .index-btn{margin-left:0;flex-shrink:0}
+@media(max-width:700px){.sbw .index-btn{padding:5px 8px;font-size:12.5px}}
+
+</style>
+</head>
+<body>
+<header class="head"><div class="wrap">
+ <div>
+  <p class="eyebrow">Work sample · Faculty Affairs Manager, Department of Medicine</p>
+  <h1>Faculty Affairs Operations Tracker</h1>
+  <p class="for">One view of every dossier, search, offer and faculty request. Each step has an owner and a target, and forecasts flag what will be late before it is.</p>
+  <span class="asof">Synthetic data · as of November 20, 2026</span>
+ </div>
+ <div class="who"><strong>Narissara Khomkhai</strong><a href="mailto:sawatdee@me.com">sawatdee@me.com</a><br><a href="career-profile.html" class="cp-link">Career profile →</a></div>
+</div></header>
+
+<nav class="tabs" aria-label="Tracker sections"><div class="wrap" role="tablist">
+ <button class="tab" role="tab" id="t-overview" aria-controls="overview" aria-selected="true">Overview</button>
+ <button class="tab" role="tab" id="t-hire" aria-controls="hire" aria-selected="false" tabindex="-1"><b class="gn">1</b>Recruit &amp; hire<small id="n-searches"></small></button>
+ <button class="tab" role="tab" id="t-promote" aria-controls="promote" aria-selected="false" tabindex="-1"><b class="gn">2</b>Appoint &amp; promote<small id="n-dossiers"></small></button>
+ <button class="tab" role="tab" id="t-develop" aria-controls="develop" aria-selected="false" tabindex="-1"><b class="gn">3</b>Develop &amp; recognize</button>
+ <button class="tab" role="tab" id="t-review" aria-controls="review" aria-selected="false" tabindex="-1"><b class="gn">4</b>Review &amp; compliance<small id="n-support"></small></button>
+ <button class="tab" role="tab" id="t-data" aria-controls="data" aria-selected="false" tabindex="-1"><b class="gn">5</b>Faculty data</button>
+ <button class="tab" role="tab" id="t-ops" aria-controls="ops" aria-selected="false" tabindex="-1"><b class="gn">6</b>Chair’s Office ops</button>
+</div><div class="subbar"><div class="wrap sbw"><div id="subbar"></div><button class="index-btn" id="index-btn" aria-haspopup="dialog">☰ Full index</button></div></div></nav>
+
+<main class="wrap">
+<section class="panel on" id="overview" role="tabpanel" aria-labelledby="t-overview">
+ <div class="takeaways" id="takeaways"></div>
+ <div class="kpis" id="kpis"></div>
+ <div class="card" style="margin-bottom:16px">
+  <h3>Every duty in the posting, grouped the way BU organizes faculty affairs</h3>
+  <p class="sub">Six groups, from hiring to operations. Select a duty to see the evidence.</p>
+  <div id="dutymap"></div>
+ </div>
+ <div class="g12">
+  <div class="card">
+   <h3>Which dossiers need attention first</h3>
+   <p class="sub">Each dot is a dossier still being assembled. Lower and further left means act now. Select a dot for details.</p>
+   <div class="chart scroll" id="quad"></div>
+  </div>
+  <div class="card">
+   <h3>Next school deadlines</h3>
+   <p class="sub">From the Faculty Affairs Office’s published 2026–27 schedule.</p>
+   <div class="dl" id="deadlines"></div>
+  </div>
+ </div>
+ <div class="g12 mt">
+  <div class="card">
+   <h3>This week’s actions</h3>
+   <p class="sub">Generated from stage targets, forecasts and checks.</p>
+   <ol class="actions" id="actions"></ol>
+  </div>
+  <div class="card">
+   <h3>Where I have done this work</h3>
+   <ul class="proof">
+    <li><b>Harvard FAS</b><span>Faculty Affairs: redesigned appointment and promotion processes, and supported faculty searches and offer letters.</span></li>
+    <li><b>Harvard FAS</b><span>Prepared reporting and meeting materials for deans, visiting committees and the governance office.</span></li>
+    <li><b>Harvard FAS</b><span>Built faculty reports for <span class="metric-inline">50+ departments</span> in SQL, Python, R and Crystal Reports. Oversaw quality control for the Faculty DataHub pilot. Ad-hoc data requests fell from <span class="metric-inline">300–400 a year to under 100</span>.</span></li>
+    <li><b>UAMS</b><span>College of Medicine: drafted grant proposals, budgets and effort splits for a principal investigator. Hired, supervised and reviewed staff.</span></li>
+   </ul>
+  </div>
+ </div>
+ <div class="card">
+  <h3>Scorecard: how this role would measure success</h3>
+  <p class="sub">Nine measures with a target, the current value and a six-month trend. Select a measure for its definition.</p>
+  <div class="score" id="scorecard"></div>
+ </div>
+ <div class="card">
+  <h3>The faculty year at a glance: three calendars on one wheel</h3>
+  <p class="sub">Academic year July to June. Outer ring: university and national reporting. Middle: the school’s Faculty Affairs Office. Inner: the department. Select any arc or dot.</p>
+  <div class="wheelwrap"><div class="chart" id="wheel"></div><div><p class="eyebrow">Next 90 days, all three calendars</p><ul class="next90" id="next90"></ul><p class="note" id="wheel-sowhat"></p></div></div>
+ </div>
+ <div class="card">
+  <h3>The faculty lifecycle, and who owns each step</h3>
+  <p class="sub">From recruitment to emeritus. Select a step to see the evidence.</p>
+  <div class="life" id="life"></div>
+  <button class="lifebase" data-go="data#dq,ranks" data-title="Faculty data runs underneath every step" data-group="Faculty data &amp; reporting">Faculty data runs underneath every step: one roster, verified against the source, feeding every report.</button>
+ </div>
+ <div class="card">
+  <h3>Department profile: the Department of Medicine</h3>
+  <p class="sub">Public facts from the department’s own pages, and how faculty affairs supports each mission.</p>
+  <div class="g12"><div>
+   <div class="facts" id="facts"></div>
+   <p class="eyebrow" style="margin-top:14px">Sections</p>
+   <div class="chips2" id="sections" style="margin-top:6px"></div>
+  </div><div>
+   <p class="eyebrow">How faculty affairs supports each mission</p>
+   <div id="missions"></div>
+  </div></div>
+  <p class="note">Sources: <a href="https://www.bumc.bu.edu/medicine/dom-introduction" target="_blank" rel="noopener">Message from the Chair of Medicine</a> · <a href="https://www.bumc.bu.edu/medicine/sections" target="_blank" rel="noopener">Department sections</a> · <a href="https://www.bu.edu/academics/?p=17955" target="_blank" rel="noopener">BU Academics: Medicine</a> (checked November 2026)</p>
+ </div>
+ <div class="card mt">
+  <h3>How BU and peer schools group this work</h3>
+  <p class="sub">The six groups in this tracker, set against the names BU and four peer medical schools use on their faculty affairs pages.</p>
+  <div class="scroll"><table class="peer"><thead><tr><th>This tracker</th><th>BU Faculty Affairs Office</th><th>BU Department of Medicine</th><th>Peer schools</th></tr></thead><tbody id="peers"></tbody></table></div>
+  <p class="note">Sources: <a href="https://www.bumc.bu.edu/camed/offices-services/faculty-affairs-office/" target="_blank" rel="noopener">BU Faculty Affairs Office</a> · <a href="https://www.bumc.bu.edu/facdev-medicine/" target="_blank" rel="noopener">BU Faculty Development (Medicine)</a> · <a href="https://case.edu/medicine/faculty-and-staff/office-faculty/faculty-resources" target="_blank" rel="noopener">Case Western</a> · <a href="https://medschool.umich.edu/offices/faculty/about" target="_blank" rel="noopener">Michigan</a> · <a href="https://medicine.tulane.edu/faculty-affairs" target="_blank" rel="noopener">Tulane</a> · <a href="https://faculty.weill.cornell.edu/faculty-affairs" target="_blank" rel="noopener">Weill Cornell</a> (checked November 2026)</p>
+ </div>
+</section>
+<section class="panel" id="hire" role="tabpanel" aria-labelledby="t-hire">
+ <div class="ph"><div><p class="eyebrow">Recruit &amp; hire</p><h2>From approved position to day one</h2></div><p>Searches, offers, amendments and onboarding.</p></div>
+ <p class="peers"><b>How BU and peers name this work:</b> BU Department of Medicine: <i>Faculty Recruitment &amp; Hiring</i> · Tulane: <i>New Faculty: Offer Letters to Onboarding</i> · Case Western: <i>Orientation</i>, <i>Offer Letters and Templates</i></p>
+ 
+ <div class="card"><div class="gantt" id="gantt"></div></div>
+ <div class="g3 mt" id="funnels"></div>
+ <div class="g2 mt">
+  <div class="card">
+   <h3>The recruitment process I would run</h3>
+   <p class="sub">One standard path for every faculty search, with an owner and lead time for each step.</p>
+   <div class="flow" id="rproc"></div>
+   <p class="note" id="rproc-total"></p>
+  </div>
+  <div class="card">
+   <h3>Rolling out the process: change management</h3>
+   <p class="sub">Introduce it with one search, train the people who use it, then make it the standard.</p>
+   <div id="change"></div>
+  </div>
+ </div>
+ <div class="g2 mt">
+  <div class="card">
+   <h3>Advertising and outreach plan</h3>
+   <p class="sub">Applicants by source across the three searches. Broad outreach builds a diverse pool.</p>
+   <div id="sources"></div>
+   <p class="note" id="sources-note"></p>
+  </div>
+  <div class="card">
+   <h3>Search committee meetings: next three weeks</h3>
+   <p class="sub">Scheduling and logistics, checked off before each meeting.</p>
+   <div class="scroll"><table class="logi"><thead><tr><th>Meeting</th><th>Date</th><th>Room or Zoom</th><th>Packet sent</th><th>Rubric</th><th>Notes owner</th></tr></thead><tbody id="meetings"></tbody></table></div>
+  </div>
+ </div>
+ <div class="g2 mt">
+  <div class="card">
+   <h3>Candidate visit itinerary · S-01, visit 3</h3>
+   <p class="sub">Wednesday 12/2. Confirmed with the candidate, search chair and every host.</p>
+   <div class="itin" id="itin"></div>
+  </div>
+  <div class="card">
+   <h3>Correspondence I draft for the chairs</h3>
+   <p class="sub">Sent on behalf of the search chair or Department Chair. Select one to read the draft.</p>
+   <div id="letters-list"></div>
+  </div>
+ </div>
+
+ <h2 class="grp">Offers and onboarding</h2>
+ 
+ <div class="g12">
+  <div class="card">
+   <h3>Offer letter review · Candidate C-3</h3>
+   <p class="sub">Clinical Assistant Professor of Medicine, General Internal Medicine (search S-03)</p>
+   <div class="scroll"><table><thead><tr><th>Check</th><th>Finding</th><th>Result</th></tr></thead><tbody id="offer"></tbody></table></div>
+   <h3 style="margin-top:18px">Offer amendments</h3>
+   <p class="sub">Each amendment is checked against the signed offer and the amendment template.</p>
+   <div class="scroll"><table><thead><tr><th>Amendment</th><th>Change</th><th>Check</th></tr></thead><tbody id="amend"></tbody></table></div>
+  </div>
+  <div class="card">
+   <h3>Result</h3>
+   <div class="chart" id="offer-ring"></div>
+   <p class="muted" id="offer-sum"></p>
+   <div class="next" style="background:var(--soft);border-left:3px solid var(--accent);padding:10px 12px;margin-top:14px;font-size:14.5px" id="offer-fix"></div>
+  </div>
+ </div>
+ <div class="card mt">
+  <h3>New faculty onboarding</h3>
+  <p class="sub">Each new appointment is tracked from signed offer to the 90-day check-in.</p>
+  <div class="scroll"><table class="onb"><thead id="onb-h"></thead><tbody id="onb-b"></tbody></table></div>
+  <div class="legend"><span><span class="dot d"></span> Done</span><span><span class="dot p"></span> In progress</span><span><span class="dot n"></span> Not started</span><span><span class="dot x"></span> Not needed</span></div>
+ </div>
+ <div class="card mt">
+  <h3>Onboarding best practices</h3>
+  <p class="sub">A standard path for every new faculty member, from signed offer to the first-year review.</p>
+  <div class="wb" id="onbest"></div>
+ </div>
+ 
+
+</section>
+<section class="panel" id="promote" role="tabpanel" aria-labelledby="t-promote">
+ <div class="ph"><div><p class="eyebrow">Appoint &amp; promote</p><h2>Every dossier, with an owner, a clock and a forecast</h2></div><p>Each stage has an owner and a target. Forecasts flag the late dossier before it is late. Terms are in the <button class="linkbtn" data-def="glossary">glossary</button>.</p></div>
+ <p class="peers"><b>How BU and peers name this work:</b> BU Faculty Affairs Office: <i>Faculty Appointments &amp; Promotions</i> · Case Western: <i>Appointments</i>, <i>Promotions and Tenure</i> · Michigan: <i>Faculty Affairs</i> (appointments and promotions)</p>
+ 
+ <div class="board" id="board"></div>
+ <div class="legend"><span><span class="pilltype u">Unmodified</span> Associate/Professor packages also go to the BU President</span><span><span class="pilltype">Modified</span> Clinical or Research title</span><span><span class="pilltype s">Secondary</span> appointment</span><span><i style="background:var(--green)"></i>Within target</span><span><i style="background:var(--amber)"></i>Past 75% of target</span><span><i style="background:var(--red)"></i>Past target</span></div>
+ <div class="card mt">
+  <h3>When a dossier stops moving: escalation ladder</h3>
+  <p class="sub">Escalation is triggered by time past the stage target, not by opinion. Each rung names who picks it up and what they do.</p>
+  <div class="ladder" id="ladder"></div>
+ </div>
+ <div class="g2 mt">
+  <div class="card">
+   <h3>Documents I draft or compile for each dossier</h3>
+   <p class="sub">Drafts go to the Chair or candidate for review. Final packages are uploaded to ADAPT.</p>
+   <div id="drafts"></div>
+  </div>
+  <div class="card">
+   <h3>What I decide, and what I escalate</h3>
+   <p class="sub">Judgment within the department’s guidelines. Anything outside them goes up the ladder.</p>
+   <div class="g2" style="gap:12px"><div><p class="eyebrow" style="color:var(--green)">I decide</p><ul class="mini" id="decide"></ul></div><div><p class="eyebrow">I escalate</p><ul class="mini" id="escalate"></ul></div></div>
+  </div>
+ </div>
+ <div class="card mt">
+  <h3>Readiness checks run on every dossier</h3>
+  <div class="scroll"><table>
+   <thead><tr><th>Check</th><th>Rule it enforces</th><th>Open now</th></tr></thead>
+   <tbody id="checks"></tbody>
+  </table></div>
+  <p class="note">Rules from the Faculty Affairs Office’s <a href="https://www.bumc.bu.edu/camed/offices-services/faculty-affairs-office/criteria-guidelines-and-forms/" target="_blank" rel="noopener">Criteria, Guidelines and Forms</a> and the <a href="https://www.bumc.bu.edu/facdev-medicine/files/2026/07/BU-CAMed-Promotions_FAQs_2026.07.27.V4.pdf" target="_blank" rel="noopener">FAP FAQs</a>.</p>
+ </div>
+
+ <h2 class="grp">Forecasts · explainable machine learning</h2>
+ <div class="rai"><b>Guardrail</b><span>These forecasts time reminders, letter requests and staffing. They never score a faculty member’s merit or decide a case. A person reviews every action they suggest.</span></div>
+ <div class="g12">
+  <div class="card">
+   <h3>Forecast · Will each dossier make its target cycle?</h3>
+   <p class="sub">Probability of a complete upload by the department’s internal deadline. Select a row to see why.</p>
+   <div id="probs"></div>
+  </div>
+  <div class="card">
+   <h3>What drives the risk</h3>
+   <p class="sub">Model weights, scaled. Left lowers the chance of making the deadline. Right raises it.</p>
+   <div id="weights"></div>
+   <div class="chart" id="calib"></div>
+   <div class="modelcard"><b>Model card.</b> Logistic regression on five inputs. Fit on 3 years of synthetic dossier history (412 dossiers). Holdout AUC 0.84. Predictions fall within 6 points of observed rates in every band.</div>
+  </div>
+ </div>
+ <div class="card mt">
+  <h3>Forecast · When will the missing evaluator letters arrive?</h3>
+  <p class="sub">Monte Carlo simulation, 4,000 runs per dossier, using each letter’s time since request. Bars show the 10th to 90th percentile date the last needed letter arrives. Dot is the median. Red tick is the date letters are needed.</p>
+  <div class="chart scroll" id="letters"></div>
+  <div class="g2 mt">
+   <div class="chart" id="survival"></div>
+   <div>
+    <p class="eyebrow">So what</p>
+    <p id="letters-sowhat" style="font-size:15px;margin-top:6px"></p>
+    <div class="modelcard"><b>Model card.</b> Reply times follow a log-normal curve, fit on synthetic history. Unmodified-rank letters: 62% reply, median 38 days. Modified-rank letters: 78% reply, median 28 days. A letter not yet received has a lower chance of ever arriving, and the simulation accounts for that.</div>
+   </div>
+  </div>
+ </div>
+ <h2 class="grp">FAP calendar</h2>
+ 
+ <div class="cyc" id="cycles"></div>
+ <div class="card mt">
+  <h3>Proposed workback: unmodified Associate Professor or Professor</h3>
+  <p class="sub">Letters drive the timeline, so the department starts six months before the school deadline.</p>
+  <div class="workback"><div class="wb" id="workback"></div></div>
+ </div>
+ <p class="note">Source: <a href="https://www.bumc.bu.edu/camed/offices-services/faculty-affairs-office/criteria-guidelines-and-forms/" target="_blank" rel="noopener">Faculty Appointments &amp; Promotions: Criteria, Guidelines and Forms</a>, Boston University Chobanian &amp; Avedisian School of Medicine (checked November 2026).</p>
+
+</section>
+<section class="panel" id="develop" role="tabpanel" aria-labelledby="t-develop">
+ <div class="ph"><div><p class="eyebrow">Develop &amp; recognize</p><h2>Ready for promotion before the dossier opens</h2></div><p>CV consultation, program referrals, training and awards.</p></div>
+ <p class="peers"><b>How BU and peers name this work:</b> BU Faculty Affairs Office: <i>Faculty Developments &amp; Events</i>, <i>Faculty &amp; Staff Awards</i> · BU Department of Medicine: <i>Career Planning &amp; CV Review</i>, <i>Grants &amp; Awards</i> · Michigan: <i>Faculty Development</i></p>
+ <div class="g2">
+  <div class="card">
+   <h3>Matching faculty to BU development programs</h3>
+   <p class="sub">Referrals this academic year, by career stage. Program names are BU’s.</p>
+   <div id="programs"></div>
+  </div>
+  <div class="card">
+   <h3>Assistant professors past typical time at rank</h3>
+   <p class="sub">8+ years at rank and not yet in the pipeline, by section</p>
+   <div id="ready"></div>
+   <p class="note"><b>So what:</b> share with section chiefs before annual reviews, where readiness for promotion is discussed.</p>
+  </div>
+ </div>
+ <div class="g2 mt">
+  <div class="card">
+   <h3>CV check I run before any promotion review</h3>
+   <p class="sub">From the school’s CV format rules, so faculty get one round of feedback, not three.</p>
+   <ul class="cvrules" id="cvrules">
+    <li>Personal statement: one page, first person</li>
+    <li>School CV format, font size 12 unchanged</li>
+    <li>Name in the header, page x of y and update date in the footer</li>
+    <li>Entries listed oldest to newest</li>
+    <li>Only accepted, in-press or e-published work</li>
+    <li>Abbreviations defined in each section</li>
+    <li>Current school name used for earlier entries</li>
+    <li>Empty headings deleted, table headers repeated</li>
+    <li>CV dated within three months of submission</li>
+   </ul>
+  </div>
+  <div class="card">
+   <h3>Awards and nominations pipeline</h3>
+   <p class="sub">Department and school awards this cycle.</p>
+   <div class="chart" id="awards"></div>
+   <p class="note" id="awards-note"></p>
+  </div>
+ </div>
+ <div class="card mt">
+  <h3>Guidance and training I run</h3>
+  <p class="sub">So section administrators, search committees and faculty get the same answer every time.</p>
+  <div class="scroll"><table><thead><tr><th>Session</th><th>For</th><th>When</th><th>Next</th><th>Materials</th></tr></thead><tbody id="training"></tbody></table></div>
+ </div>
+</section>
+<section class="panel" id="review" role="tabpanel" aria-labelledby="t-review">
+ <div class="ph"><div><p class="eyebrow">Annual review &amp; compliance</p><h2>The records that keep everything else running</h2></div><p>Annual reviews, compliance items, leaves, emeritus requests and confidential records.</p></div>
+ <p class="peers"><b>How BU and peers name this work:</b> BU Faculty Affairs Office: <i>Faculty Annual Review &amp; Compliances</i>, <i>Policies &amp; Procedures</i> · Case Western: <i>Annual Performance Reviews</i>, <i>Departure and Leaves of Absence</i></p>
+ <div class="g12">
+  <div class="card">
+   <h3>Annual review meetings booked, by section</h3>
+   <p class="sub">Reviews cover the prior calendar year, per school bylaws and LCME accreditation. Share of faculty with a January–March meeting booked.</p>
+   <div id="annual"></div>
+  </div>
+  <div class="card">
+   <h3>Compliance items due</h3>
+   <p class="sub">Recurring faculty requirements the office tracks.</p>
+   <div id="compliance"></div>
+  </div>
+ </div>
+ <h2 class="grp">Faculty requests</h2>
+ 
+ <div class="g12">
+  <div class="card">
+   <h3>Open requests by age</h3>
+   <p class="sub">Bar is days open. Tick is the target. Select a row for its path.</p>
+   <div id="aging"></div>
+  </div>
+  <div class="card">
+   <h3>What faculty ask for</h3>
+   <div class="donutwrap"><div class="chart" id="donut"></div><ul class="klist" id="donut-k"></ul></div>
+  </div>
+ </div>
+ <div class="card mt">
+  <h3>Handling sensitive and confidential matters</h3>
+  <p class="sub">Who can see what. Faculty IDs replace names in every report outside the Chair’s Office.</p>
+  <div class="g12"><div class="scroll"><table class="onb"><thead id="acc-h"></thead><tbody id="acc-b"></tbody></table></div>
+  <ul class="mini" id="sens"></ul></div>
+  <div class="legend"><span><span class="dot d"></span> Full access</span><span><span class="dot p"></span> Summary only</span><span><span class="dot n"></span> No access</span></div>
+ </div>
+ 
+
+ <div class="mt"><div class="card">
+   <h3>Standard paths</h3>
+   <p class="sub">Proposed department paths. Confirm each against BU policy at onboarding.</p>
+   <div id="paths"></div>
+  </div></div>
+</section>
+<section class="panel" id="data" role="tabpanel" aria-labelledby="t-data">
+ <div class="ph"><div><p class="eyebrow">Faculty data &amp; reporting</p><h2>The numbers the Chair asks for</h2></div><p>Synthetic figures shaped like a department of about 500 faculty across 14 sections.</p></div>
+ <p class="peers"><b>How BU and peers name this work:</b> BU Faculty Affairs Office: <i>AAMC Salary Reports</i> · Weill Cornell: the office is <i>the official source for faculty data</i> · Case Western: a <i>Faculty Information System</i> tracks milestones</p>
+ 
+ <div class="g2">
+  <div class="card">
+   <h3>Faculty by rank and title type</h3>
+   <div id="ranks"></div>
+   <div class="legend"><span><i class="c-u"></i>Unmodified</span><span><i class="c-c"></i>Clinical</span><span><i class="c-r"></i>Research</span></div>
+  </div>
+  <div class="card">
+   <h3>Where promotion time goes</h3>
+   <p class="sub">Median days from chair approval to final letter</p>
+   <div id="cycle"></div>
+   <div class="legend"><span><i class="s1"></i>Materials</span><span><i class="s2"></i>Evaluator letters</span><span><i class="s3"></i>Department review</span><span><i class="s4"></i>ADAPT to FAP</span><span><i class="s5"></i>Executive Committee and final</span></div>
+   <p class="note"><b>So what:</b> letters take about half the time for unmodified ranks. Request 12 letters early and send reminders every two weeks.</p>
+  </div>
+ </div>
+ <div class="g2 mt">
+  
+  <div class="card">
+   <h3>Faculty publications by quarter</h3>
+   <p class="sub">Accepted, in-press and e-published items matched to the roster</p>
+   <div class="vbars" id="pubs"></div><div class="vlabels" id="pubs-l"></div>
+   <p class="note">*Quarter in progress. Counts follow the CV rule: no manuscripts in preparation, submitted or under revision.</p>
+  </div>
+ </div>
+ <div class="g2 mt">
+  <div class="card">
+   <h3>Faculty activity this quarter</h3>
+   <p class="sub">Reported to the Chair monthly, by section on request.</p>
+   <div id="activity"></div>
+  </div>
+  <div class="card">
+   <h3>Roster data quality</h3>
+   <p class="sub">Share of faculty records with each field complete and verified against the source.</p>
+   <div id="dq"></div>
+   <p class="note" id="dq-note"></p>
+  </div>
+ </div>
+
+ <div class="g2 mt">
+  <div class="card">
+   <h3>Retention: departures in the last 12 months</h3>
+   <p class="sub">Totals by reason only. No names, sections or exit-interview detail.</p>
+   <div id="retention"></div>
+  </div>
+  <div class="card">
+   <h3>New faculty still here after three years</h3>
+   <p class="sub">By hiring year. Target 85%.</p>
+   <div class="chart" id="ret3"></div>
+  </div>
+ </div>
+ <div class="card mt">
+  <h3>Faculty records</h3>
+  <p class="sub">One record per faculty member, shown by ID. Select a row to open the record.</p>
+  <div class="scroll"><table id="records"><thead><tr><th>ID</th><th>Section</th><th>Current title</th><th>Years at rank</th><th>CV dated</th><th>Annual review</th><th>Open items</th></tr></thead><tbody id="records-b"></tbody></table></div>
+ </div>
+ <div class="card mt">
+  <h3>Compensation against peers · AAMC benchmark</h3>
+  <p class="sub">Department median salary as a percentile of the AAMC Northeast benchmark, by rank and title type. Percentiles only. No individual pay is shown.</p>
+  <div class="chart scroll" id="aamc"></div>
+  <p class="note" id="aamc-note"></p>
+ </div>
+</section>
+<section class="panel" id="ops" role="tabpanel" aria-labelledby="t-ops">
+ <div class="ph"><div><p class="eyebrow">Chair’s Office operations</p><h2>Continuity, capacity and the meetings that keep work moving</h2></div><p>Coverage, absences, special projects, committees and a workload forecast.</p></div>
+ <p class="peers"><b>How BU and peers name this work:</b> BU Faculty Affairs Office: <i>Meetings &amp; Committees</i>, <i>Bylaws</i> · BU Department of Medicine: <i>FDD Committee</i></p>
+ 
+ <div class="card">
+  <h3>Coverage matrix</h3>
+  <p class="sub">Every recurring task has a primary and a trained backup.</p>
+  <div class="scroll"><table class="onb"><thead id="cov-h"></thead><tbody id="cov-b"></tbody></table></div>
+  <div class="legend"><span><span class="pill-p">P</span> Primary</span><span><span class="pill-b">B</span> Backup</span></div>
+ </div>
+ <div class="g2 mt">
+  <div class="card">
+   <h3>Absence coverage: next six weeks</h3>
+   <p class="sub">Planned time off, with who covers and what is handed over.</p>
+   <div id="absence"></div>
+  </div>
+  <div class="card">
+   <h3>Special projects and ad hoc requests</h3>
+   <p class="sub">Progress against the date the Chair needs each one.</p>
+   <div id="projects"></div>
+  </div>
+ </div>
+
+ <div class="card mt">
+  <h3>Committee and meeting calendar · next eight weeks</h3>
+  <p class="sub">Meetings the Faculty Affairs Manager schedules, prepares or staffs.</p>
+  <div id="committees"></div>
+ </div>
+ <div class="card mt">
+  <h3>Forecast · How many dossiers will the office handle each month?</h3>
+  <p class="sub">Seasonal forecast with an 80% range, against what the team can review well in a month.</p>
+  <div class="chart scroll" id="workload"></div>
+  <p class="note" id="workload-sowhat"></p>
+  <div class="modelcard"><b>Model card.</b> Seasonal baseline from the same month last year, plus trend. The 80% range comes from 12 months of past forecast errors. Capacity of 12 a month is a planning assumption to confirm with the team.</div>
+ </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap">
+ <span>Work sample by Narissara Khomkhai. All faculty, candidates and figures are synthetic. BU process rules and dates come from the school’s public Faculty Affairs pages.</span>
+ <span><button class="linkbtn" data-def="glossary">Glossary</button></span>
+</div></footer>
+
+<dialog id="dlg" aria-labelledby="dlg-title"><button class="close" data-close>Close ×</button><div id="dlg-body"></div></dialog>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const TODAY = new Date('2026-11-20T12:00:00');
+const DAY = 864e5;
+const d = s => new Date(s + 'T12:00:00');
+const iso = x => new Date(x).toISOString().slice(0, 10);
+const fmt = s => { const x = typeof s === 'string' ? d(s) : new Date(s); return (x.getMonth() + 1) + '/' + x.getDate() + '/' + String(x.getFullYear()).slice(2); };
+const days = s => Math.round((d(s) - TODAY) / DAY);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct = p => p > 0 && p < .01 ? '<1%' : p > .99 && p < 1 ? '>99%' : Math.round(p * 100) + '%';
+const addDays = (s, n) => iso(d(s).getTime() + n * DAY);
+
+/* ================= DATA ================= */
+/* Published 2026–27 FAP schedule (cycles 4–9) */
+const CYCLES = [
+ {n:4, pa:'2026-10-05', oth:'2026-10-12', fap:'2026-11-05', ec:'2026-11-18', dist:'2026-11-23'},
+ {n:5, pa:'2026-11-02', oth:'2026-11-09', fap:'2026-12-03', ec:'2026-12-16', dist:'2026-12-23'},
+ {n:6, pa:'2026-12-07', oth:'2026-12-14', fap:'2027-01-14', ec:'2027-01-27', dist:'2027-02-03'},
+ {n:7, pa:'2027-01-04', oth:'2027-01-11', fap:'2027-02-11', ec:'2027-02-24', dist:'2027-03-03'},
+ {n:8, pa:'2027-02-01', oth:'2027-02-08', fap:'2027-03-11', ec:'2027-03-24', dist:'2027-03-31'},
+ {n:9, pa:'2027-03-01', oth:'2027-03-08', fap:'2027-04-15', ec:'2027-04-28', dist:'2027-05-05'}
+];
+const cyc = n => CYCLES.find(c => c.n === n);
+
+/* Stages, owners and service targets (BU roles) */
+const STAGES = [
+ {n:'Readiness', o:'Section chief and candidate', t:30},
+ {n:'Materials', o:'Candidate and department administrator', t:21},
+ {n:'Evaluator letters', o:'Chair solicits, evaluators reply', t:60},
+ {n:'Department review', o:'Department A&P committee and Chair', t:21},
+ {n:'Uploaded to ADAPT', o:'Department administrator', t:35},
+ {n:'FAP and Executive Committee', o:'School FAP Committee', t:30},
+ {n:'Final approval', o:'BU President or Faculty Affairs Office', t:30}
+];
+const TIERS = [
+ {k:'T0', who:'Stage owner', at:.75, act:'Automatic reminder at 75% of the stage target'},
+ {k:'T1', who:'Faculty Affairs Manager', at:1, act:'Direct follow-up and package check'},
+ {k:'T2', who:'Section chief or A&P committee chair', at:1.5, act:'Short memo with options and a call'},
+ {k:'T3', who:'Department Chair', at:2, act:'Chair’s desk review and decision'},
+ {k:'T4', who:'School Faculty Affairs Office', at:3, act:'Agree to hold to the next cycle or proceed'}
+];
+const tierOf = r => { let t = -1; TIERS.forEach((x, i) => { if (r >= x.at) t = i; }); return t; };
+
+const DOCS_STD = ['FAP checklist','Log sheet with department vote','Chair’s cover letter','Personal statement (one page)','BU CV, dated within three months','Evaluator list, internal and external','Evaluator solicitation letter','Evaluator letters'];
+
+/* Synthetic dossiers. inStage = days in current stage. Letter fields drive the forecasts. */
+const DOS = [
+ {id:'F-1789', sec:'Biomedical Genetics', act:'Promotion', rank:'Associate Professor', type:'U', cycle:4, stage:6, inStage:2, need:6, got:7, req:12, open:[], next:'Executive Committee approved 11/18. Unmodified rank, so the package goes to the BU President. Track the decision and prepare the faculty notice.'},
+ {id:'F-2266', sec:'General Internal Medicine', act:'Appointment', rank:'Assistant Professor', type:'U', bumg:true, cycle:4, stage:6, inStage:2, need:1, got:1, open:[], next:'Approved. The school distributes letters on 11/23. Send to the faculty member, update the roster and set the first annual review.'},
+ {id:'F-1932', sec:'Pulmonary, Allergy, Sleep & Critical Care', act:'Promotion', rank:'Clinical Professor', type:'C', cycle:5, stage:5, inStage:18, need:6, got:6, open:[], next:'On the FAP agenda for 12/3. Hold the chair’s calendar for any committee questions.'},
+ {id:'F-2405', sec:'Hematology & Medical Oncology', act:'Appointment', rank:'Instructor', type:'U', cycle:5, stage:5, inStage:11, need:0, got:0, open:[], next:'On the FAP agenda for 12/3. No evaluator letters are required for Instructor.'},
+ {id:'F-1877', sec:'General Internal Medicine', act:'Promotion', rank:'Clinical Associate Professor', type:'C', cycle:6, stage:3, inStage:16, need:6, got:6, open:[], next:'Department A&P vote 11/24. Chair signs the cover letter by 11/25. Upload to ADAPT by the 11/30 internal deadline, a week ahead of the school deadline.'},
+ {id:'F-2302', sec:'Preventive Medicine & Epidemiology', act:'Appointment', rank:'Research Assistant Professor', type:'R', cycle:6, stage:4, inStage:3, need:3, got:3, open:[], next:'Uploaded to ADAPT 11/17. Complete. Goes to FAP on 1/14/27.'},
+ {id:'F-2210', sec:'Infectious Diseases', act:'Appointment', rank:'Assistant Professor', type:'U', cycle:6, stage:2, inStage:52, need:3, got:2, req:3, out:1, asked:'2026-09-29', q:.78, med:28, open:['Personal statement not received','One evaluator letter outstanding'], next:'Request the personal statement today and remind the third evaluator. If either is missing on 12/7, move the dossier to Cycle 7 rather than submit it incomplete.'},
+ {id:'F-2118', sec:'Nephrology', act:'Secondary appointment', rank:'Secondary appointment', type:'S', cycle:6, stage:3, inStage:29, need:0, got:0, open:['Secondary department vote missing from the log sheet'], next:'Ask the secondary department administrator for the vote count, then route the chair letter and log sheet for signature.'},
+ {id:'F-2433', sec:'Cardiovascular Medicine', act:'Appointment', rank:'Clinical Assistant Professor', type:'C', bumg:true, cycle:7, stage:1, inStage:9, need:1, got:0, open:[], next:'CV in the school format received 11/18. Personal statement due 11/30. Chair solicits the evaluator letter by 12/4.'},
+ {id:'F-2041', sec:'Cardiovascular Medicine', act:'Promotion', rank:'Associate Professor', type:'U', cycle:7, stage:2, inStage:71, need:6, got:4, req:12, out:6, asked:'2026-09-10', q:.62, med:38, cvDate:'2026-09-15', open:['BU CV dated 9/15/26 will be more than three months old at the 1/4/27 deadline','Two arm’s-length letters still needed'], next:'Send reminders to the six evaluators who have not replied. Ask the candidate for a CV dated after 10/4/26.'},
+ {id:'F-1650', sec:'Endocrinology, Diabetes, Nutrition & Weight Management', act:'Promotion', rank:'Professor', type:'U', cycle:8, stage:2, inStage:48, need:6, got:5, req:12, out:5, asked:'2026-10-03', q:.62, med:38, open:['One letter is from an active collaborator and does not count toward the six'], next:'Solicit two more arm’s-length evaluators from the backup list now, to allow for slow replies.'},
+ {id:'F-1590', sec:'Gastroenterology', act:'Promotion', rank:'Clinical Associate Professor', type:'C', cycle:8, stage:0, inStage:24, need:6, got:0, req:12, out:12, plan:'2026-12-07', q:.78, med:28, open:[], next:'Chair agreed at the October annual review. Request a CV in the school format and the evaluator list by 12/1, so letters go out by 12/7.'}
+];
+const typeName = {U:'Unmodified', C:'Modified · Clinical', R:'Modified · Research', S:'Secondary'};
+const typeCls = {U:'u', C:'', R:'', S:'s'};
+DOS.forEach(x => {
+ const c = cyc(x.cycle);
+ x.school = /Associate Professor|^Professor|Clinical Professor/.test(x.rank) ? c.pa : c.oth;
+ x.internal = addDays(x.school, -7);
+ x.lettersBy = addDays(x.internal, -7);
+ x.ratio = x.inStage / STAGES[x.stage].t;
+ x.tier = x.stage >= 4 ? -1 : tierOf(x.ratio);
+});
+
+/* Synthetic searches */
+const SEARCH = [
+ {id:'S-01', title:'Section Chief', sub:'Leadership search', status:'Campus visits, 2 of 4 complete', color:'var(--accent)', start:'2026-09-01', end:'2027-01-15',
+  ms:[['2026-09-08','Committee charged'],['2026-10-13','Long list approved'],['2026-11-06','First-round interviews done'],['2026-12-11','Campus visits complete'],['2026-12-18','Committee recommendation'],['2027-01-15','Offer target']],
+  funnel:[['Applicants',46],['Long list',14],['First round',8],['Finalists',4],['Offer',0]], next:'Visit 3 on 12/2: confirm itinerary, chair dinner and the faculty feedback form. Feedback summary to the search chair within 48 hours.'},
+ {id:'S-02', title:'Physician-scientist', sub:'Assistant or Associate Professor · Cardiovascular Medicine', status:'Long list review', color:'var(--slate)', start:'2026-10-15', end:'2027-02-26',
+  ms:[['2026-10-15','Posted'],['2026-11-24','Long list meeting'],['2026-12-18','First-round interviews'],['2027-01-29','Campus visits'],['2027-02-26','Offer target']],
+  funnel:[['Applicants',38],['Long list',0],['First round',0],['Finalists',0],['Offer',0]], next:'Send the 38 applications to the committee with the scoring rubric by 11/23 for the 11/24 long-list meeting.'},
+ {id:'S-03', title:'Clinician-educator', sub:'Clinical Assistant Professor · General Internal Medicine', status:'Offer in review', color:'var(--gold)', start:'2026-08-03', end:'2026-12-04',
+  ms:[['2026-08-03','Posted'],['2026-09-04','Long list approved'],['2026-09-25','First-round interviews'],['2026-10-23','Campus visits complete'],['2026-11-20','Offer drafted'],['2026-12-04','Offer signed target']],
+  funnel:[['Applicants',29],['Long list',10],['First round',6],['Finalists',3],['Offer',1]], next:'Offer letter has two open findings. See Offers & onboarding. After signature, open the appointment dossier.'}
+];
+
+const OFFER = [
+ ['Title and rank match the approved search','Clinical Assistant Professor of Medicine','pass'],
+ ['Section and department line','Section of General Internal Medicine, Department of Medicine','pass'],
+ ['Current department template','Template version matches','pass'],
+ ['Compensation components add up','Base plus clinical incentive differs from the stated total by $2,500','flag'],
+ ['Effort split totals 100%','Clinical 70% · Education 20% · Scholarship 10%','pass'],
+ ['Start date allows onboarding','A 1/4/27 start leaves less time than the credentialing checklist needs','flag'],
+ ['Appointment approval language','Appointment subject to school review and approval','pass'],
+ ['Signature block and copies','Chair · copies to section chief and HR','pass']
+];
+const ONB_STEPS = ['Offer signed','Dossier in ADAPT','HR and payroll','Hospital credentialing','IT and EHR access','Day-one orientation','Mentor matched','90-day check-in'];
+const ONB = [
+ ['F-2266 · General Internal Medicine','d d d d p n n n'],
+ ['F-2405 · Hematology & Medical Oncology','d d p p n n n n'],
+ ['F-2302 · Preventive Medicine & Epidemiology','d d p x p n n n'],
+ ['Candidate C-3 · General Internal Medicine','p n n n n n n n']
+];
+
+/* Faculty support requests (synthetic) */
+const PATHS = {
+ cv:{n:'CV and promotion advice', c:'var(--slate)', steps:[['CV received','Faculty',0],['Format and content check','FA Manager',3],['Written feedback','FA Manager',2],['Follow-up if needed','Faculty',2]]},
+ leave:{n:'Leave of absence', c:'var(--accent)', steps:[['Request','Faculty',0],['Section chief review','Section chief',5],['Chair approval','Chair',5],['Coverage plan','Section',7],['HR and benefits handoff','HR',4]]},
+ emer:{n:'Emeritus request', c:'var(--gold)', steps:[['Faculty request','Faculty',0],['Chair letter of support','Chair',14],['Dean approval','Dean',21],['Notice and records update','FA Manager',10]]},
+ outside:{n:'Outside activity review', c:'#7c5a9e', steps:[['Disclosure filed','Faculty',0],['Conflict screen','FA Manager',7],['Chair review','Chair',10],['Management plan if needed','Chair',13]]},
+ data:{n:'Faculty data correction', c:'#5f8a6e', steps:[['Request','Faculty or section',0],['Verify against source','FA Manager',4],['Correct and confirm','FA Manager',3],['Note in the change log','FA Manager',3]]},
+ other:{n:'Title change or retirement', c:'#8aa3b0', steps:[['Request','Faculty',0],['Chair discussion','Chair',10],['Paperwork and approvals','FA Manager',20],['Records update','FA Manager',5]]}
+};
+const PT = k => PATHS[k].steps.reduce((a, s) => a + s[2], 0);
+const REQ = [
+ {id:'R-288', k:'outside', sec:'Endocrinology', rec:'2026-10-01', st:'With the Chair', own:'Chair'},
+ {id:'R-290', k:'emer', sec:'Nephrology', rec:'2026-10-06', st:'Dean approval pending', own:'Dean'},
+ {id:'R-295', k:'leave', sec:'Biomedical Genetics', rec:'2026-10-27', st:'Coverage plan', own:'Section'},
+ {id:'R-297', k:'data', sec:'Pulmonary', rec:'2026-11-05', st:'Verifying against source', own:'FA Manager'},
+ {id:'R-298', k:'leave', sec:'General Internal Medicine', rec:'2026-11-09', st:'Chair approval', own:'Chair'},
+ {id:'R-299', k:'other', sec:'Hematology & Medical Oncology', rec:'2026-11-10', st:'Chair discussion', own:'Chair'},
+ {id:'R-300', k:'data', sec:'Cardiovascular Medicine', rec:'2026-11-16', st:'Correct and confirm', own:'FA Manager'},
+ {id:'R-301', k:'cv', sec:'Cardiovascular Medicine', rec:'2026-11-17', st:'Format and content check', own:'FA Manager'},
+ {id:'R-302', k:'other', sec:'Preventive Medicine & Epidemiology', rec:'2026-11-18', st:'Request received', own:'Chair'},
+ {id:'R-303', k:'cv', sec:'Infectious Diseases', rec:'2026-11-19', st:'CV received', own:'FA Manager'}
+];
+REQ.forEach(r => { r.age = -days(r.rec); r.target = PT(r.k); r.ratio = r.age / r.target; r.tier = tierOf(r.ratio); });
+
+const DEFS = {
+ fap:['FAP Committee','The school’s Faculty Appointments & Promotions Committee. It reviews dossiers at scheduled meetings, followed by the Executive Committee.'],
+ adapt:['ADAPT','The system where designated department administrators upload completed dossiers. Faculty submit their materials to the department, not to ADAPT.'],
+ log:['Log sheet','The template that records the department vote. For a secondary appointment submitted with the primary, it records votes from both departments.'],
+ mod:['Unmodified and modified titles','Unmodified titles require scholarship recognized inside and outside the institution. Modified titles carry a prefix or suffix, such as Clinical or Research, with their own criteria and templates.'],
+ arm:['Arm’s-length letter','A letter from a faculty member at or above the proposed rank who is not a close friend, mentor or active collaborator. Required for unmodified Associate Professor and Professor.'],
+ bumg:['BUMG','Boston University Medical Group (formerly FPF). Assistant Professor appointments need one letter for BUMG faculty and three for others.'],
+ target:['Stage target','The proposed number of days a dossier should spend in a stage. Crossing 75% sends a reminder. Crossing the target starts the escalation ladder.'],
+ auc:['AUC','How well a model ranks cases. 0.5 is a coin flip, 1.0 is perfect. 0.84 means it ranks a late dossier above an on-time one 84% of the time.'],
+ mc:['Monte Carlo simulation','Running the same uncertain process thousands of times with random reply times, then reading the spread of outcomes as a forecast range.']
+};
+
+/* ================= MODELS ================= */
+/* Seeded random numbers so the sample reads the same every time */
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function erf(x) { const s = Math.sign(x); x = Math.abs(x); const t = 1 / (1 + .3275911 * x); const y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - .284496736) * t + .254829592) * t * Math.exp(-x * x); return s * y; }
+const SIG = .6;
+const lnCdf = (t, med) => t <= 0 ? 0 : .5 * (1 + erf(Math.log(t / med) / (SIG * Math.SQRT2)));
+
+/* Model 1: logistic regression for making the target cycle */
+const W = {b0:-.4, short:-.55, left:.9, docs:-.7, stage:.45, over:-1.1};
+const FEAT = [['short','Letters still needed'],['docs','Open document issues'],['over','Time past stage target'],['left','Time left before deadline (per 30 days)'],['stage','Stages already complete']];
+function feats(x) { return {short:Math.max(0, x.need - x.got), left:Math.max(0, days(x.internal)) / 30, docs:x.open.length, stage:x.stage, over:Math.max(0, x.ratio - 1)}; }
+function predict(x) {
+ if (x.stage >= 4) return {p:.97, parts:[]};
+ const f = feats(x); let z = W.b0; const parts = [];
+ FEAT.forEach(([k, n]) => { const c = W[k] * f[k]; z += c; parts.push([n, c, f[k]]); });
+ return {p:1 / (1 + Math.exp(-z)), parts, z};
+}
+DOS.forEach(x => { const r = predict(x); x.p = r.p; x.parts = r.parts; });
+
+/* Model 2: Monte Carlo letter arrival */
+function simLetters(x, startOverride) {
+ const R = rng(x.id.split('').reduce((a, c) => a + c.charCodeAt(0), 7)), N = 4000;
+ const start = startOverride || x.asked || x.plan, elapsed = Math.max(0, -days(start));
+ const m = x.need - x.got;
+ const F = lnCdf(elapsed, x.med), qp = x.q * (1 - F) / (1 - x.q * F);
+ const mu = Math.log(x.med), res = [];
+ for (let i = 0; i < N; i++) {
+  const arr = [];
+  for (let j = 0; j < x.out; j++) {
+   if (R() > qp) continue;
+   let t = 0, g = 0;
+   do { const u1 = R() || 1e-9, u2 = R(); const zz = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); t = Math.exp(mu + SIG * zz); g++; } while (t <= elapsed && g < 60);
+   if (t <= elapsed) t = elapsed + 1;
+   arr.push(t);
+  }
+  arr.sort((a, b) => a - b);
+  res.push(arr.length >= m ? d(start).getTime() + arr[m - 1] * DAY : Infinity);
+ }
+ res.sort((a, b) => a - b);
+ const q = p => res[Math.min(N - 1, Math.floor(p * N))];
+ const by = d(x.lettersBy).getTime();
+ return {m, start, p:res.filter(v => v <= by).length / N, p10:q(.1), p50:q(.5), p90:q(.9), never:res.filter(v => !isFinite(v)).length / N};
+}
+const LET = DOS.filter(x => x.out && x.need > x.got).map(x => ({x, s:simLetters(x)}));
+const f1590 = DOS.find(x => x.id === 'F-1590');
+const LATE = {x:f1590, s:simLetters(f1590, '2027-01-04')};
+
+/* Model 3: workload forecast */
+const MONTHS = ['Jun 25','Jul 25','Aug','Sep','Oct','Nov','Dec','Jan 26','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan 27','Feb','Mar','Apr','May'];
+const HIST = [6,9,11,13,12,10,7,9,12,14,11,8,7,10,12,14,13,11];
+const FC = HIST.slice(6, 12).map(v => Math.round(v * 1.06 + .4));
+const BAND = [2.4,2.8,3.1,3.4,3.6,3.8];
+const CAP = 12;
+
+/* ================= OVERVIEW ================= */
+const building = DOS.filter(x => x.stage < 4);
+const atRisk = building.filter(x => x.p < .5);
+const pastTarget = DOS.filter(x => x.tier >= 1).length + REQ.filter(r => r.tier >= 1).length;
+const worstLet = [...LET].sort((a, b) => a.s.p - b.s.p)[0];
+const peak = FC.map((v, i) => [v, MONTHS[18 + i]]).filter(v => v[0] > CAP);
+$('#takeaways').innerHTML = [
+ ['', 'Deadline risk', `<strong>${atRisk.length} dossiers</strong> have under a 50% chance of making their cycle: ${atRisk.map(x => x.id).join(', ')}.`, 'promote#probs'],
+ ['amber', 'Evaluator letters', `${worstLet.x.id} has a <strong>${pct(worstLet.s.p)}</strong> chance its last ${worstLet.s.m === 1 ? 'letter arrives' : worstLet.s.m + ' letters arrive'} by ${fmt(worstLet.x.lettersBy)}. Add backup evaluators now.`, 'promote#letters'],
+ ['slate', 'Workload', peak.length ? `Forecast tops capacity in <strong>${peak.map(p => p[1]).join(' and ')}</strong>. Front-load reviews in January and plan coverage.` : 'Forecast stays within capacity for six months.', 'ops#workload']
+].map(t => `<button class="tk ${t[0]}" data-go="${t[3]}" data-title="${t[1]}"><b>${t[1]}</b>${t[2]}</button>`).join('');
+
+const kpis = [
+ [DOS.length, 'Dossiers in tracker', building.length + ' still being assembled', 'promote'],
+ [DOS.filter(x => x.cycle === 6).length, 'Due for Cycle 6', 'School deadlines 12/7 and 12/14', 'promote'],
+ [atRisk.length, 'At risk of missing cycle', 'Model probability under 50%', 'promote#probs', 'warn'],
+ [pastTarget, 'Items past stage target', 'Dossiers and requests on the ladder', 'promote#ladder', 'warn'],
+ [SEARCH.length, 'Open searches', '1 offer in review', 'hire'],
+ [REQ.length, 'Faculty requests open', REQ.filter(r => r.tier >= 1).length + ' past target', 'review#aging,paths']
+];
+$('#kpis').innerHTML = kpis.map(k => `<button class="kpi ${k[4] || ''}" data-go="${k[3]}" data-title="${esc(k[1])}"><strong>${k[0]}</strong><span>${k[1]}</span><small>${k[2]}</small></button>`).join('');
+$('#n-dossiers').textContent = DOS.length; $('#n-searches').textContent = SEARCH.length; $('#n-support').textContent = REQ.length;
+
+/* Risk quadrant */
+(function quad() {
+ const Wd = 560, H = 300, L = 46, R = 16, T = 14, B = 40, xmax = 80;
+ const X = v => L + Math.min(v, xmax) / xmax * (Wd - L - R), Y = p => T + (1 - p) * (H - T - B);
+ let s = `<svg viewBox="0 0 ${Wd} ${H}" style="min-width:460px" role="img" aria-label="Scatter chart of dossiers by days to internal deadline and probability of making the cycle">`;
+ s += `<rect x="${L}" y="${Y(.5)}" width="${X(30) - L}" height="${Y(0) - Y(.5)}" fill="var(--red-pale)"/><text x="${L + 6}" y="${Y(0) - 8}" font-size="12" fill="var(--red)" font-weight="700">Act now</text>`;
+ s += `<rect x="${X(30)}" y="${Y(.5)}" width="${X(xmax) - X(30)}" height="${Y(0) - Y(.5)}" fill="var(--amber-pale)" opacity=".6"/><text x="${X(xmax) - 6}" y="${Y(0) - 8}" font-size="12" fill="var(--amber)" font-weight="700" text-anchor="end">Watch</text>`;
+ [0, .25, .5, .75, 1].forEach(p => s += `<line class="gr" x1="${L}" x2="${Wd - R}" y1="${Y(p)}" y2="${Y(p)}"/><text class="lbl" x="${L - 6}" y="${Y(p) + 4}" text-anchor="end">${pct(p)}</text>`);
+ [0, 20, 40, 60, 80].forEach(v => s += `<text class="lbl" x="${X(v)}" y="${H - B + 16}" text-anchor="middle">${v}</text>`);
+ s += `<text class="lbl" x="${(L + Wd - R) / 2}" y="${H - 6}" text-anchor="middle">Days to the department’s internal deadline</text>`;
+ s += `<line class="ax" x1="${L}" x2="${L}" y1="${T}" y2="${H - B}"/><line class="ax" x1="${L}" x2="${Wd - R}" y1="${H - B}" y2="${H - B}"/>`;
+ const placed = [];
+ building.forEach(x => {
+  const cx = X(Math.max(0, days(x.internal))), cy = Y(x.p), r = 7 + Math.max(0, x.need - x.got) * 1.6;
+  const col = x.p < .5 ? 'var(--red)' : x.p < .75 ? 'var(--amber)' : 'var(--green)';
+  let ly = cy - r - 4; placed.forEach(pp => { if (Math.abs(pp[0] - cx) < 50 && Math.abs(pp[1] - ly) < 13) ly -= 13; }); placed.push([cx, ly]);
+  s += `<g data-open="dos:${x.id}" tabindex="0" role="button" aria-label="${x.id}, ${pct(x.p)} chance, ${days(x.internal)} days to deadline"><circle cx="${cx}" cy="${cy}" r="${r}" fill="${col}" fill-opacity=".85"/><text x="${cx}" y="${ly}" font-size="12" font-weight="700" text-anchor="middle">${x.id}</text></g>`;
+ });
+ s += '</svg>';
+ $('#quad').innerHTML = s + '<div class="legend"><span>Dot size grows with letters still needed</span><span><i style="background:var(--red)"></i>Under 50%</span><span><i style="background:var(--amber)"></i>50–75%</span><span><i style="background:var(--green)"></i>Over 75%</span></div>';
+})();
+
+const dl = [['Cycle 4','Letters distributed','2026-11-23'],['Cycle 6','Department internal deadline','2026-11-30'],['Cycle 5','FAP Committee meets','2026-12-03'],['Cycle 6','Professor & Associate due','2026-12-07'],['Cycle 6','All other dossiers due','2026-12-14']];
+$('#deadlines').innerHTML = dl.map(x => `<div class="${/due|internal/.test(x[1]) && days(x[2]) <= 17 ? 'hot' : ''}"><b>${x[0]}</b><strong>${x[1]}</strong><span>${fmt(x[2])}</span><em>in ${days(x[2])} days</em></div>`).join('');
+
+const acts = [];
+building.filter(x => x.open.length || x.p < .5).sort((a, b) => a.p - b.p).forEach(x => acts.push([x.id + ' · ' + x.rank, (x.open[0] || 'Below 50% chance of making its cycle') + '.', pct(x.p) + ' on time', 'dos:' + x.id]));
+REQ.filter(r => r.tier >= 1).forEach(r => acts.push([r.id + ' · ' + PATHS[r.k].n, `${r.age} days open against a ${r.target}-day target. ${TIERS[r.tier].who} follows up.`, TIERS[r.tier].k, 'req:' + r.id]));
+acts.push(['Offer · Candidate C-3', 'Two findings to fix before the Chair signs.', 'Target 12/4', 'go:hire']);
+$('#actions').innerHTML = acts.slice(0, 7).map(a => `<li><button class="linkbtn" data-open="${a[3]}">${esc(a[0])}</button><span>${esc(a[1])}</span><span class="due">${a[2]}</span></li>`).join('');
+
+/* ================= DOSSIERS ================= */
+$('#board').innerHTML = STAGES.map((st, i) => {
+ const items = DOS.filter(x => x.stage === i);
+ return `<div class="col"><h4 class="colhead"><span>${st.n}<small>${st.o} · ${st.t} days</small></span><span>${items.length}</span></h4>${items.map(x => {
+  const cls = x.ratio >= 1 ? 'r' : x.ratio >= .75 ? 'w' : '';
+  const meter = x.need ? `<div class="lettermeter" aria-label="${x.got} of ${x.need} letters">${Array.from({length: x.need}, (_, j) => `<i class="${j < Math.min(x.got, x.need) ? 'on' : ''}"></i>`).join('')}</div>` : '';
+  return `<button class="dcard ${x.ratio >= 1 && i < 4 ? 'over' : x.open.length ? 'flag' : ''}" data-open="dos:${x.id}"><strong>${x.id} · ${esc(x.rank)}</strong><span class="sec">${esc(x.sec)}</span><span class="meta"><span class="pilltype ${typeCls[x.type]}">${typeName[x.type].split(' · ')[0]}</span><span>Cycle ${x.cycle}</span></span>${meter}<div class="clock"><i class="${cls}" style="width:${Math.min(100, x.ratio * 100)}%"></i></div><div class="clocktxt">${x.inStage} of ${st.t} days${x.tier >= 1 ? ' · ' + TIERS[x.tier].k : ''}</div></button>`;
+ }).join('')}</div>`;
+}).join('');
+
+const onRung = i => DOS.filter(x => x.tier === i).map(x => x.id).concat(REQ.filter(r => r.tier === i).map(r => r.id));
+$('#ladder').innerHTML = TIERS.map((t, i) => { const ids = onRung(i);
+ return `<div class="rung r${i}"><b>${t.k} · ${i === 0 ? '75% of target' : t.at + '× target'}</b><strong>${t.who}</strong><span>${t.act}</span><em class="${ids.length ? 'hot' : ''}">${ids.length ? ids.join(', ') : 'None now'}</em></div>`; }).join('');
+
+const CHECKS = [
+ ['BU CV date','Dated no more than three months before submission to the Dean’s Office', DOS.filter(x => x.open.some(o => o.includes('CV'))).length],
+ ['Evaluator letter count','Instructor 0 · Assistant 1 (BUMG) or 3 · Clinical or Research Associate/Professor 6, with 3 from outside BU · unmodified Associate/Professor 6 arm’s-length', DOS.filter(x => x.open.some(o => o.includes('letter'))).length],
+ ['Arm’s-length rule','Unmodified Associate/Professor letters exclude close friends, mentors and active collaborators', DOS.filter(x => x.open.some(o => o.includes('collaborator'))).length],
+ ['Letter age and rank','Letters under one year old, from faculty at or above the proposed rank', 0],
+ ['Complete package','Every document on the checklist. Incomplete packages may be held to the next meeting', DOS.filter(x => x.open.some(o => o.includes('statement'))).length],
+ ['Secondary appointment votes','Log sheet carries the secondary department’s vote', DOS.filter(x => x.type === 'S' && x.open.length).length]
+];
+$('#checks').innerHTML = CHECKS.map(c => `<tr><th scope="row">${c[0]}</th><td>${c[1]}</td><td>${c[2] ? `<span class="st flag">${c[2]} open</span>` : '<span class="st pass">Clear</span>'}</td></tr>`).join('');
+
+/* ================= FORECASTS ================= */
+const pcol = p => p < .5 ? 'var(--red)' : p < .75 ? 'var(--amber)' : 'var(--green)';
+$('#probs').innerHTML = [...building].sort((a, b) => a.p - b.p).map(x => `<div class="prob"><button data-open="why:${x.id}"><strong>${x.id} · ${esc(x.rank)}</strong><small>Cycle ${x.cycle} · internal deadline ${fmt(x.internal)}</small></button><div class="bar"><i style="width:${x.p * 100}%;background:${pcol(x.p)}"></i><u></u></div><b style="color:${pcol(x.p)}">${pct(x.p)}</b></div>`).join('') + '<p class="note">Dashed line marks 50%. Dossiers already uploaded are not scored.</p>';
+
+const wmax = Math.max(...FEAT.map(f => Math.abs(W[f[0]])));
+$('#weights').innerHTML = FEAT.map(([k, n]) => { const w = W[k], half = Math.abs(w) / wmax * 50;
+ return `<div class="contrib"><span>${n}</span><div class="z"><i style="${w < 0 ? `right:50%;width:${half}%;background:var(--red)` : `left:50%;width:${half}%;background:var(--green)`}"></i></div><b>${w > 0 ? '+' : ''}${w.toFixed(2)}</b></div>`; }).join('');
+
+(function calib() {
+ const P = [[.1,.12,61],[.3,.27,74],[.5,.53,88],[.7,.66,97],[.9,.91,92]];
+ const S = 220, L = 34, T = 10, B = 30, Wd = 300, X = v => L + v * (S - L - 10), Y = v => T + (1 - v) * (S - T - B);
+ let s = `<svg viewBox="0 0 ${Wd} ${S}" role="img" aria-label="Calibration chart: predicted versus observed on-time rates fall close to the diagonal" style="max-width:340px;margin-top:10px">`;
+ s += `<line class="gr" x1="${X(0)}" y1="${Y(0)}" x2="${X(1)}" y2="${Y(1)}" stroke-dasharray="4 3"/>`;
+ [0, .5, 1].forEach(v => s += `<text class="lbl" x="${L - 4}" y="${Y(v) + 4}" text-anchor="end">${pct(v)}</text><text class="lbl" x="${X(v)}" y="${S - B + 14}" text-anchor="middle">${pct(v)}</text>`);
+ s += `<line class="ax" x1="${L}" x2="${X(1)}" y1="${Y(0)}" y2="${Y(0)}"/><line class="ax" x1="${L}" x2="${L}" y1="${T}" y2="${Y(0)}"/>`;
+ s += `<polyline fill="none" stroke="var(--slate)" stroke-width="2" points="${P.map(p => X(p[0]) + ',' + Y(p[1])).join(' ')}"/>`;
+ P.forEach(p => s += `<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="${3 + p[2] / 30}" fill="var(--slate)"/>`);
+ s += `<text class="lbl" x="${(L + X(1)) / 2}" y="${S - 4}" text-anchor="middle">Predicted on-time rate</text><text x="${L + 8}" y="${T + 12}" font-size="12.5" font-weight="700">Calibration</text><text class="lbl" x="${L + 8}" y="${T + 27}">observed vs predicted</text></svg>`;
+ $('#calib').innerHTML = s;
+})();
+
+(function letters() {
+ const rows = LET.map(r => ({lab:r.x.id + ' · ' + r.x.rank, sub:`${r.s.m} more needed · ${r.x.out} out · ${r.x.asked ? 'asked' : 'planned'} ${fmt(r.x.asked || r.x.plan)}`, s:r.s, by:r.x.lettersBy, id:r.x.id}));
+ rows.push({lab:'F-1590 · if letters wait until 1/4/27', sub:'Same dossier, requests four weeks later', s:LATE.s, by:LATE.x.lettersBy, id:'F-1590', alt:true});
+ const t0 = TODAY.getTime(), t1 = d('2027-03-15').getTime(), Wd = 900, L = 330, R = 70, rowH = 44, T = 26, H = T + rows.length * rowH + 30;
+ const X = t => L + (Math.min(Math.max(t, t0), t1) - t0) / (t1 - t0) * (Wd - L - R);
+ let s = `<svg viewBox="0 0 ${Wd} ${H}" style="min-width:720px" role="img" aria-label="Forecast ranges for when the last needed evaluator letter arrives, by dossier">`;
+ ['2026-12-01','2027-01-01','2027-02-01','2027-03-01'].forEach(m => { const x = X(d(m).getTime()); s += `<line class="gr" x1="${x}" x2="${x}" y1="${T - 6}" y2="${H - 26}"/><text class="lbl" x="${x}" y="${T - 10}" text-anchor="middle">${['Dec','Jan','Feb','Mar'][['2026-12-01','2027-01-01','2027-02-01','2027-03-01'].indexOf(m)]}</text>`; });
+ s += `<text class="lbl" x="${Wd - R + 8}" y="${T - 10}">Chance</text>`;
+ rows.forEach((r, i) => {
+  const y = T + i * rowH + 18, a = X(r.s.p10), b = isFinite(r.s.p90) ? X(r.s.p90) : Wd - R, m = isFinite(r.s.p50) ? X(r.s.p50) : null, by = X(d(r.by).getTime());
+  s += `<g data-open="dos:${r.id}"><text x="0" y="${y - 2}" font-size="13.5" font-weight="700">${esc(r.lab)}</text><text class="lbl" x="0" y="${y + 13}">${esc(r.sub)}</text>`;
+  s += `<rect x="${a}" y="${y - 8}" width="${Math.max(3, b - a)}" height="16" rx="3" fill="${r.alt ? 'var(--neutral)' : 'var(--slate-pale)'}" stroke="var(--slate)" stroke-width="1"/>`;
+  if (!isFinite(r.s.p90)) s += `<text class="lbl" x="${b - 6}" y="${y + 4}" text-anchor="end">${pct(r.s.never)} may never arrive</text>`;
+  if (m) s += `<circle cx="${m}" cy="${y}" r="5" fill="var(--slate)"/>`;
+  s += `<line x1="${by}" x2="${by}" y1="${y - 13}" y2="${y + 13}" stroke="var(--red)" stroke-width="3"/>`;
+  s += `<text x="${Wd - R + 8}" y="${y + 5}" font-size="15" font-weight="700" fill="${pcol(r.s.p)}">${pct(r.s.p)}</text></g>`;
+ });
+ s += `<text class="lbl" x="${L}" y="${H - 6}">Today 11/20</text></svg>`;
+ $('#letters').innerHTML = s;
+ const base = LET.find(r => r.x.id === 'F-1590');
+ $('#letters-sowhat').innerHTML = `Starting F-1590’s letters on 12/7 instead of 1/4 lifts its chance of having six letters in time from <b>${LATE.s.p < .01 ? 'almost none' : pct(LATE.s.p)}</b> to <b>${pct(base.s.p)}</b>. For F-2041, ${pct(LET.find(r => r.x.id === 'F-2041').s.p)} is too low to wait: add two backup arm’s-length evaluators this week.`;
+})();
+
+(function survival() {
+ const Wd = 420, H = 230, L = 40, R = 12, T = 22, B = 34, tmax = 120;
+ const X = t => L + t / tmax * (Wd - L - R), Y = v => T + (1 - v) * (H - T - B);
+ const curve = (q, med) => Array.from({length: 61}, (_, i) => { const t = i * 2; return X(t) + ',' + Y(1 - q * lnCdf(t, med)); }).join(' ');
+ let s = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Survival curves showing the share of requested letters still outstanding over time, for unmodified and modified ranks">`;
+ s += `<text x="${L}" y="14" font-size="13" font-weight="700">Share of requested letters still outstanding</text>`;
+ [0, .5, 1].forEach(v => s += `<line class="gr" x1="${L}" x2="${Wd - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="lbl" x="${L - 4}" y="${Y(v) + 4}" text-anchor="end">${pct(v)}</text>`);
+ [0, 30, 60, 90, 120].forEach(t => s += `<text class="lbl" x="${X(t)}" y="${H - B + 15}" text-anchor="middle">${t}</text>`);
+ s += `<text class="lbl" x="${(L + Wd - R) / 2}" y="${H - 4}" text-anchor="middle">Days since the request</text>`;
+ s += `<polyline fill="none" stroke="var(--accent)" stroke-width="2.5" points="${curve(.62, 38)}"/><polyline fill="none" stroke="var(--slate)" stroke-width="2.5" points="${curve(.78, 28)}"/>`;
+ s += `<text x="${X(120) - 2}" y="${Y(1 - .62 * lnCdf(120, 38)) - 6}" font-size="12" text-anchor="end" fill="var(--accent)" font-weight="700">Unmodified</text><text x="${X(120) - 2}" y="${Y(1 - .78 * lnCdf(120, 28)) + 16}" font-size="12" text-anchor="end" fill="var(--slate)" font-weight="700">Modified</text></svg>`;
+ $('#survival').innerHTML = s;
+})();
+
+(function workload() {
+ const Wd = 860, H = 260, L = 40, R = 16, T = 16, B = 40, n = MONTHS.length, ymax = 22;
+ const X = i => L + i / (n - 1) * (Wd - L - R), Y = v => T + (1 - v / ymax) * (H - T - B);
+ let s = `<svg viewBox="0 0 ${Wd} ${H}" style="min-width:680px" role="img" aria-label="Monthly dossier volume, 18 months of history and a 6-month forecast with an 80 percent range, against a capacity of 12">`;
+ [0, 5, 10, 15, 20].forEach(v => s += `<line class="gr" x1="${L}" x2="${Wd - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="lbl" x="${L - 6}" y="${Y(v) + 4}" text-anchor="end">${v}</text>`);
+ MONTHS.forEach((m, i) => { if (i % 2 === 1) s += `<text class="lbl" x="${X(i)}" y="${H - B + 16}" text-anchor="middle">${m}</text>`; });
+ const f0 = HIST.length - 1;
+ const up = FC.map((v, i) => X(f0 + 1 + i) + ',' + Y(v + BAND[i])), lo = FC.map((v, i) => X(f0 + 1 + i) + ',' + Y(Math.max(0, v - BAND[i]))).reverse();
+ s += `<polygon points="${X(f0)},${Y(HIST[f0])} ${up.join(' ')} ${lo.join(' ')}" fill="var(--slate-pale)"/>`;
+ s += `<line x1="${L}" x2="${Wd - R}" y1="${Y(CAP)}" y2="${Y(CAP)}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 4"/><text x="${L + 6}" y="${Y(CAP) - 6}" font-size="12.5" fill="var(--accent)" font-weight="700">Capacity ${CAP} a month</text>`;
+ s += `<polyline fill="none" stroke="var(--ink)" stroke-width="2.5" points="${HIST.map((v, i) => X(i) + ',' + Y(v)).join(' ')}"/>`;
+ s += `<polyline fill="none" stroke="var(--slate)" stroke-width="2.5" stroke-dasharray="6 4" points="${X(f0)},${Y(HIST[f0])} ${FC.map((v, i) => X(f0 + 1 + i) + ',' + Y(v)).join(' ')}"/>`;
+ FC.forEach((v, i) => { if (v > CAP) s += `<circle cx="${X(f0 + 1 + i)}" cy="${Y(v)}" r="6" fill="var(--accent)"/><text x="${X(f0 + 1 + i)}" y="${Y(v) - 10}" font-size="12.5" font-weight="700" text-anchor="middle">${v}</text>`; });
+ s += `<line x1="${X(f0)}" x2="${X(f0)}" y1="${T}" y2="${H - B}" stroke="var(--muted)" stroke-dasharray="2 3"/><text class="lbl" x="${X(f0) + 4}" y="${T + 10}">Forecast →</text></svg>`;
+ $('#workload').innerHTML = s + '<div class="legend"><span><i style="background:var(--ink)"></i>Actual</span><span><i style="background:var(--slate)"></i>Forecast</span><span><i style="background:var(--slate-pale)"></i>80% range</span></div>';
+ $('#workload-sowhat').innerHTML = peak.length ? `<b>So what:</b> ${peak.map(p => p[1] + ' (' + p[0] + ')').join(' and ')} exceed capacity. Move Cycle 7 and 8 department reviews earlier into January, cross-train a backup for ADAPT uploads, and avoid overlapping time off in those months.` : '';
+})();
+
+/* ================= SEARCHES ================= */
+const G0 = d('2026-08-01'), G1 = d('2027-04-01'), span = G1 - G0;
+const pos = s => ((d(s) - G0) / span * 100).toFixed(2) + '%';
+$('#gantt').innerHTML = `<div class="gmonths"><span></span><div>${['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'].map(m => `<span>${m}</span>`).join('')}</div></div>` +
+ SEARCH.map(s => `<div class="grow"><button class="lab" data-open="srch:${s.id}"><strong>${s.id} · ${esc(s.title)}</strong><small>${esc(s.status)}</small></button><div class="gtr"><i class="ph1" style="left:${pos(s.start)};width:calc(${pos(s.end)} - ${pos(s.start)});background:${s.color};opacity:.35"></i>${s.ms.map(m => `<i class="ms ${d(m[0]) <= TODAY ? 'done' : ''}" style="left:${pos(m[0])}" title="${esc(m[1])} · ${fmt(m[0])}"></i>`).join('')}</div></div>`).join('');
+const gl = document.createElement('div'); gl.style.cssText = 'position:absolute;inset:0;pointer-events:none'; $('#gantt').appendChild(gl);
+function placeToday() { const row = $('#gantt .gtr'); if (!row || !row.offsetWidth) return; const g = $('#gantt').getBoundingClientRect(), r = row.getBoundingClientRect(); gl.innerHTML = `<i class="today" style="left:${r.left - g.left + r.width * ((TODAY - G0) / span)}px;top:22px"><span>Today 11/20</span></i>`; }
+$('#funnels').innerHTML = SEARCH.map(s => { const top = s.funnel[0][1];
+ return `<div class="card"><h3>${s.id} · ${esc(s.title)}</h3><p class="sub">${esc(s.sub)}</p><div class="funnel">${s.funnel.map(f => `<div class="frow"><span>${f[0]}</span><i style="width:${Math.max(f[1] / top * 100, f[1] ? 3 : 0)}%;background:${s.color}"></i><b>${f[1] || '–'}</b></div>`).join('')}</div><p class="note"><button class="linkbtn" data-open="srch:${s.id}">Milestones and next step</button></p></div>`; }).join('');
+
+/* ================= OFFERS ================= */
+$('#offer').innerHTML = OFFER.map(o => `<tr><th scope="row">${o[0]}</th><td>${o[1]}</td><td><span class="st ${o[2]}">${o[2] === 'pass' ? 'Pass' : 'Fix'}</span></td></tr>`).join('');
+const fails = OFFER.filter(o => o[2] === 'flag').length, passN = OFFER.length - fails;
+(function ring() { const C = 2 * Math.PI * 52, a = passN / OFFER.length * C;
+ $('#offer-ring').innerHTML = `<svg viewBox="0 0 160 160" style="max-width:170px" role="img" aria-label="${passN} of ${OFFER.length} checks pass"><circle cx="80" cy="80" r="52" fill="none" stroke="var(--amber)" stroke-width="18"/><circle cx="80" cy="80" r="52" fill="none" stroke="var(--green)" stroke-width="18" stroke-dasharray="${a} ${C}" transform="rotate(-90 80 80)"/><text x="80" y="84" font-size="26" font-weight="700" text-anchor="middle">${passN} of ${OFFER.length}</text><text x="80" y="104" font-size="12" text-anchor="middle" fill="var(--muted)">checks pass</text></svg>`; })();
+$('#offer-sum').textContent = fails + ' findings go back to the section administrator before the Chair signs.';
+$('#offer-fix').innerHTML = '<b>Fixes:</b> correct the compensation total, and confirm the start date with the credentialing office or move it to 2/1/27.';
+$('#onb-h').innerHTML = `<tr><th>New faculty</th>${ONB_STEPS.map(s => `<th>${s}</th>`).join('')}</tr>`;
+const dotName = {d:'Done', p:'In progress', n:'Not started', x:'Not needed'};
+$('#onb-b').innerHTML = ONB.map(r => `<tr><th scope="row">${r[0]}</th>${r[1].split(' ').map(k => `<td><span class="dot ${k}" role="img" aria-label="${dotName[k]}"></span></td>`).join('')}</tr>`).join('');
+
+/* ================= SUPPORT ================= */
+const amax = Math.max(...REQ.map(r => Math.max(r.age, r.target)));
+$('#aging').innerHTML = [...REQ].sort((a, b) => b.ratio - a.ratio).map(r => { const col = r.ratio >= 1 ? 'var(--red)' : r.ratio >= .75 ? 'var(--amber)' : 'var(--green)';
+ return `<div class="prob"><button data-open="req:${r.id}"><strong>${r.id} · ${PATHS[r.k].n}</strong><small>${esc(r.sec)} · ${esc(r.st)}</small></button><div class="bar"><i style="width:${r.age / amax * 100}%;background:${col}"></i><u style="left:${r.target / amax * 100}%;border-left:2px solid var(--ink)"></u></div><b style="color:${col}">${r.age}d</b></div>`; }).join('');
+(function donut() {
+ const keys = Object.keys(PATHS), cnt = keys.map(k => REQ.filter(r => r.k === k).length), tot = cnt.reduce((a, b) => a + b, 0);
+ const C = 2 * Math.PI * 56; let off = 0, s = `<svg viewBox="0 0 170 170" role="img" aria-label="Donut chart of open requests by type">`;
+ keys.forEach((k, i) => { if (!cnt[i]) return; const len = cnt[i] / tot * C; s += `<circle cx="85" cy="85" r="56" fill="none" stroke="${PATHS[k].c}" stroke-width="26" stroke-dasharray="${len - 2} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 85 85)"/>`; off += len; });
+ s += `<text x="85" y="88" font-size="28" font-weight="700" text-anchor="middle">${tot}</text><text x="85" y="106" font-size="12" text-anchor="middle" fill="var(--muted)">open</text></svg>`;
+ $('#donut').innerHTML = s;
+ $('#donut-k').innerHTML = keys.map((k, i) => `<li><i style="background:${PATHS[k].c}"></i><span>${PATHS[k].n}</span><b>${cnt[i]}</b></li>`).join('');
+})();
+$('#paths').innerHTML = Object.entries(PATHS).map(([k, p]) => `<p style="font-weight:700;margin-top:10px;font-size:14.5px">${p.n} <span class="muted" style="font-weight:400">· target ${PT(k)} days</span></p><div class="flow">${p.steps.map(s => `<span>${s[0]}<small>${s[1]}${s[2] ? ' · ' + s[2] + 'd' : ''}</small></span>`).join('')}</div>`).join('');
+
+/* ================= DATA ================= */
+const RANKS = [['Instructor',20,30,12],['Assistant',70,98,30],['Associate',52,62,18],['Professor',58,30,8]];
+const rmax = Math.max(...RANKS.map(r => r[1] + r[2] + r[3]));
+$('#ranks').innerHTML = RANKS.map(r => { const t = r[1] + r[2] + r[3];
+ return `<div class="hbar"><span>${r[0]}</span><div class="t" style="width:${t / rmax * 100}%"><span class="c-u" style="width:${r[1] / t * 100}%" title="Unmodified ${r[1]}"></span><span class="c-c" style="width:${r[2] / t * 100}%" title="Clinical ${r[2]}"></span><span class="c-r" style="width:${r[3] / t * 100}%" title="Research ${r[3]}"></span></div><b>${t}</b></div>`; }).join('') + `<p class="note">Total ${RANKS.reduce((a, r) => a + r[1] + r[2] + r[3], 0)} faculty (synthetic).</p>`;
+const CYC = [['Unmodified Assoc./Prof.',[30,120,25,40,35]],['Modified Assoc./Prof.',[25,60,20,35,20]],['Assistant / Instructor',[15,20,10,25,15]]];
+const cmax = Math.max(...CYC.map(c => c[1].reduce((a, b) => a + b)));
+$('#cycle').innerHTML = CYC.map(c => { const t = c[1].reduce((a, b) => a + b);
+ return `<div class="hbar"><span>${c[0]}</span><div class="t" style="width:${t / cmax * 100}%">${c[1].map((v, i) => `<span class="s${i + 1}" style="width:${v / t * 100}%" title="${v} days"></span>`).join('')}</div><b>${t}d</b></div>`; }).join('');
+const READY = [['General Internal Med.',7],['Cardiovascular',4],['Pulmonary',3],['Infectious Diseases',3],['Endocrinology',2],['Hem/Onc',2],['Nephrology',1]];
+$('#ready').innerHTML = READY.map(r => `<div class="hbar"><span>${r[0]}</span><div class="t" style="background:none"><span style="width:${r[1] / 7 * 100}%;background:var(--slate);border-radius:3px"></span></div><b>${r[1]}</b></div>`).join('');
+const PUBS = [['Q1 FY26',212],['Q2',198],['Q3',241],['Q4',226],['Q1 FY27',254],['Q2*',137]];
+$('#pubs').innerHTML = PUBS.map(p => `<div><b>${p[1]}</b><i style="height:${p[1] / 260 * 140}px;${p[0].includes('*') ? 'opacity:.45' : ''}"></i></div>`).join('');
+$('#pubs-l').innerHTML = PUBS.map(p => `<span>${p[0]}</span>`).join('');
+
+/* ================= CALENDAR ================= */
+const nextC = CYCLES.find(k => d(k.pa) >= TODAY);
+$('#cycles').innerHTML = CYCLES.map(c => {
+ const past = d(c.dist) < TODAY, now = c === nextC, review = !past && d(c.oth) < TODAY;
+ return `<div class="${past ? 'past' : ''} ${now ? 'now' : ''}"><b>Cycle ${c.n}</b><dl><dt>Dept. internal</dt><dd>${fmt(addDays(c.pa, -7))}</dd><dt>Prof. / Assoc.</dt><dd>${fmt(c.pa)}</dd><dt>All other</dt><dd>${fmt(c.oth)}</dd><dt><button class="def" data-def="fap">FAP</button></dt><dd>${fmt(c.fap)}</dd><dt>Exec. Comm.</dt><dd>${fmt(c.ec)}</dd><dt>Letters</dt><dd>${fmt(c.dist)}</dd></dl>${now ? '<span class="tagnow">Next deadline</span>' : review ? '<span class="tagnow" style="color:var(--slate)">In school review</span>' : ''}</div>`;
+}).join('');
+const WB = [['6 months','Chair confirms readiness at annual review. Candidate updates CV and statement.'],['5 months','Evaluator list of 12, internal and external, alphabetical.'],['5 months','Chair sends solicitation letters.'],['2 months','Reminders every two weeks. Backup evaluators if the forecast drops below 70%.'],['1 month','Department A&P review and vote on the log sheet.'],['2 weeks','Chair’s cover letter. CV date and letter checks.'],['Deadline','Upload complete dossier to ADAPT.']];
+$('#workback').innerHTML = WB.map(w => `<div><b>${w[0]}</b>${w[1]}</div>`).join('');
+
+/* ================= V3: FULL DUTY COVERAGE ================= */
+const GROUPS = [['hire','Recruit & hire'],['promote','Appoint & promote'],['develop','Develop & recognize'],['review','Annual review & compliance'],['data','Faculty data & reporting'],['ops','Chair’s Office operations']];
+const DUTIES = [
+ ['Partner with senior leadership on high-level searches','Section Chief search with the search chair and Chair','hire#gantt,funnels'],
+ ['Own the recruitment process and change management','Standard search path and a four-step rollout','hire#rproc,change'],
+ ['Scheduling and logistics for search meetings','Meeting checklist for the next three weeks','hire#meetings'],
+ ['Advertising, outreach, correspondence and candidate visits','Outreach plan, drafted letters, visit itinerary','hire#sources,itin,letters-list'],
+ ['Review offer letters and amendments before signature','Eight-point offer check and amendment log','hire#offer'],
+ ['Develop onboarding best practices','Standard path from signed offer to first annual review','hire#onbest,onb-h'],
+ ['Manage the appointment and promotion workflow','12 dossiers with owners, stage clocks and forecasts','promote#board'],
+ ['Compile dossiers, upload to ADAPT, draft documents','Checklists, readiness checks, documents I draft','promote#drafts,checks'],
+ ['Judgment within broad department guidelines','What I decide, what I escalate, escalation ladder','promote#decide,ladder'],
+ ['CV consultation and document preparation','CV and statement check, program referrals','develop#cvrules,programs'],
+ ['Guidance and training for recruitment, hiring and support','Training calendar for committees, administrators, faculty','develop#training'],
+ ['Diverse, sensitive and critical matters','Access rules for confidential records','review#acc-h'],
+ ['Ongoing faculty support','Leaves, emeritus requests, outside activities, corrections','review#aging'],
+ ['Faculty data management and analysis','Rank mix, data quality, AAMC benchmark','data#dq,ranks'],
+ ['Track and report faculty activities and publications','Quarterly activity and publications','data#activity,pubs'],
+ ['Chair’s Office support, absence coverage, special projects','Coverage matrix, absence plan, projects, committees','ops#cov-h,absence,projects']
+];
+$('#dutymap').innerHTML = '<div class="dgroups">' + GROUPS.map((g, gi) => `<div class="dgroup"><button class="dghead" data-go="${g[0]}"><b>${gi + 1}</b>${g[1]}</button>${DUTIES.filter(x => x[2].split('#')[0] === g[0]).map(x => `<button class="duty" data-go="${x[2]}" data-title="${esc(x[0])}" data-group="${esc(g[1])}"><span>${x[0]}<small>${x[1]}</small></span></button>`).join('')}</div>`).join('') + '</div>';
+
+/* A&P: documents and judgment */
+const DRAFTS = [['Chair’s cover letter','Drafted for the Chair’s edits and signature','4 drafted for Cycle 6'],['Evaluator solicitation letters','From the school template for modified or unmodified ranks','30 sent this term'],['Faculty appointment cover page','School template, three pages at most','2 in progress'],['Log sheet','Department vote recorded, and both departments for secondary appointments','1 awaiting a vote'],['Evaluator list','Internal and external, each in alphabetical order','3 checked'],['Appointment and title-change letters','Drafted after approval, for the Chair’s signature','2 this month']];
+$('#drafts').innerHTML = DRAFTS.map(r => `<div class="letterrow"><span><b>${r[0]}</b><small>${r[1]}</small></span><span class="tag">${r[2]}</span></div>`).join('');
+$('#decide').innerHTML = ['Reminders, follow-ups and meeting scheduling','Whether a package is complete enough to upload','Holding an incomplete dossier to the next cycle, with notice to the Chair','Template and format fixes in offers and dossiers','Adding backup evaluators from the Chair’s approved list'].map(s => `<li>${s}</li>`).join('');
+$('#escalate').innerHTML = ['Any change to rank, title or track','Compensation or start-date changes in an offer','A letter writer who may not be arm’s length','Concerns about fairness, conduct or conflicts, the same day','Any item that misses a school deadline twice'].map(s => `<li>${s}</li>`).join('');
+
+/* Searches: process, change, outreach, meetings, itinerary, letters */
+const RPROC = [['Position approval','Chair and Dean’s office',21],['Search plan and committee charge','Search chair · FA Manager',14],['Advertising and outreach','FA Manager',45],['Review and long list','Search committee',30],['First-round interviews','Committee · FA Manager schedules',21],['Campus visits','FA Manager',30],['Recommendation and approval','Chair',14],['Offer and negotiation','Chair · FA Manager drafts',21]];
+$('#rproc').innerHTML = RPROC.map(s => `<span>${s[0]}<small>${s[1]} · ${s[2]}d</small></span>`).join('');
+$('#rproc-total').textContent = 'Target from approval to signed offer: ' + RPROC.reduce((a, s) => a + s[2], 0) + ' days, about six and a half months.';
+$('#change').innerHTML = [['Month 1','Listen and map','Interview two search chairs and the section administrators. Write down what already works.'],['Month 2','Pilot one search','Run S-02 on the standard path, with shared templates for ads, letters and itineraries.'],['Month 3','Train and publish','Committee orientation, an administrator guide and one template library.'],['Month 6','Review and adjust','Time to fill, breadth of the applicant pool and candidate feedback, reviewed with the Chair.']].map(r => `<div class="chg"><b>${r[0]}</b><span><strong>${r[1]}.</strong> ${r[2]}</span></div>`).join('');
+const SRC = [['Specialty society job boards',31],['Academic job sites',24],['Direct outreach by committee',22],['Networks for underrepresented physicians and scientists',17],['Internal referrals',12],['Conference recruiting',7]];
+const srcTot = SRC.reduce((a, s) => a + s[1], 0), srcMax = SRC[0][1];
+$('#sources').innerHTML = SRC.map((s, i) => `<div class="gauge"><span>${s[0]}</span><div class="t"><i style="width:${s[1] / srcMax * 100}%;background:${i === 2 || i === 3 ? 'var(--accent)' : 'var(--slate)'}"></i></div><b>${s[1]}</b></div>`).join('');
+$('#sources-note').innerHTML = `<b>So what:</b> direct outreach and professional networks bring in ${Math.round((22 + 17) / srcTot * 100)}% of ${srcTot} applicants. Tracking yield by source shows where to put ad spend for the next search.`;
+const MEET = [['S-02 long-list meeting','11/24','Zoom','ok','ok','FA Manager'],['S-02 first-round scheduling','12/1','Zoom','ok','—','FA Manager'],['S-01 visit 3 debrief','12/3','Conference room','ok','ok','Search chair'],['S-01 visit 4 debrief','12/10','Hybrid','Due 12/7','ok','FA Manager'],['S-01 final recommendation','12/18','Chair’s conference room','Due 12/15','ok','FA Manager']];
+$('#meetings').innerHTML = MEET.map(m => `<tr><th scope="row">${m[0]}</th><td>${m[1]}</td><td>${m[2]}</td><td class="${m[3] === 'ok' ? 'ok' : 'no'}">${m[3] === 'ok' ? '✓' : m[3]}</td><td class="${m[4] === 'ok' ? 'ok' : ''}">${m[4] === 'ok' ? '✓' : m[4]}</td><td>${m[5]}</td></tr>`).join('');
+const ITIN = [['7:45','Breakfast with the search chair','Hotel restaurant'],['9:00','Meeting with the Department Chair','Chair’s office','key'],['10:00','Section faculty, three small groups','Rotating, 25 minutes each'],['11:30','Lunch with fellows and residents','No faculty present, so trainees speak freely'],['12:45','Tour of clinical and research space','Guided by the section administrator'],['14:00','Research presentation','Open to the department','key'],['15:30','Vice chairs and research center directors','Two 30-minute meetings'],['16:30','Search committee wrap-up','Questions from the candidate'],['18:30','Dinner with the Chair and two committee members','Reservation confirmed']];
+$('#itin').innerHTML = ITIN.map(r => `<div class="${r[3] || ''}"><b>${r[0]}</b><span>${r[1]}<small>${r[2]}</small></span></div>`).join('') + '<p class="note">Feedback form sent to every host by 6 pm. Summary to the search chair by 12/4.</p>';
+const LTRS = [
+ ['Outreach to potential candidates','From the search chair','Dear Dr. [Name],\n\nThe Department of Medicine is searching for a Section Chief, and colleagues have suggested you as someone who could lead the section’s clinical, research and education programs. I would welcome a short conversation about the role, whether for yourself or for colleagues you would recommend.\n\nThe full position description is attached. I will follow up next week to find a time that suits you.\n\nWith best regards,\n[Search chair], on behalf of the search committee'],
+ ['Invitation to a first-round interview','From the search chair','Dear Dr. [Name],\n\nThank you for your application. The committee would like to invite you to a 45-minute video interview. Please choose a time from the options in the link below by [date].\n\nYou will meet five committee members. There is nothing to prepare beyond your application. If you need any accommodation, reply to this message and we will arrange it.\n\nSincerely,\n[Search chair]'],
+ ['Campus visit confirmation and itinerary','From the Faculty Affairs Manager','Dear Dr. [Name],\n\nWe look forward to welcoming you on Wednesday, December 2. Your itinerary is attached, with host names, rooms and travel details. Your hotel is booked for December 1 and 2, and a car will collect you at 7:30 am.\n\nIf anything changes, please call me directly at [number]. I will be your contact throughout the visit.\n\nBest wishes,\nNarissara Khomkhai, Faculty Affairs Manager'],
+ ['Update to applicants not advancing','From the search chair','Dear Dr. [Name],\n\nThank you for your interest in the position and for the time you put into your application. The committee received a strong pool, and after careful review we will not be moving your application forward.\n\nWe appreciate your interest in the Department of Medicine and wish you every success.\n\nSincerely,\n[Search chair]'],
+ ['Request for nominations','From the Department Chair','Dear Colleague,\n\nWe are recruiting a physician-scientist in Cardiovascular Medicine at the rank of Assistant or Associate Professor. I would be grateful for the names of promising candidates you know, especially those whose path may not bring them to our usual channels.\n\nThe position description is attached. Nominations can be sent to me or to our Faculty Affairs Manager.\n\nWith thanks,\n[Department Chair]']
+];
+$('#letters-list').innerHTML = LTRS.map((l, i) => `<div class="letterrow"><span><b>${l[0]}</b><small>${l[1]}</small></span><button class="linkbtn" data-open="ltr:${i}">Read draft</button></div>`).join('');
+
+/* Offers: amendments, onboarding best practices, training */
+const AMEND = [['A-14 · F-2266','Start date moved from 1/4/27 to 1/18/27','pass','Matches the amendment template. Credentialing timeline confirmed.'],['A-15 · F-2302','Effort increased from 80% to 100%','flag','Funding source for the added effort is missing. Returned to the section administrator.']];
+$('#amend').innerHTML = AMEND.map(a => `<tr><th scope="row">${a[0]}</th><td>${a[1]}<br><span class="muted" style="font-size:13px">${a[3]}</span></td><td><span class="st ${a[2]}">${a[2] === 'pass' ? 'Pass' : 'Fix'}</span></td></tr>`).join('');
+$('#onbest').innerHTML = [['60 days before','Welcome letter from the Chair. One named onboarding contact. Credentialing started.'],['30 days before','IT, EHR and badge requests. Workspace and first-month schedule set.'],['Day 1','Section welcome, the Chair’s welcome and a one-page contacts sheet.'],['Week 1','Key policies, CV in the school format, the annual review timeline.'],['Day 30','Mentor matched. First check-in.'],['Day 90','Short check-in survey, issues fixed. Promotion criteria walk-through.'],['Month 12','First annual review and a promotion-readiness conversation.']].map(w => `<div><b>${w[0]}</b>${w[1]}</div>`).join('');
+$('#training').innerHTML = [['Search committee orientation','Search committee members','At each search kickoff · 45 min','12/8 · S-02','Process, scoring rubric, confidentiality, fair evaluation'],['Dossiers and ADAPT upload','Section administrators','Before each FAP cycle · 30 min','12/1 · Cycle 7','Checklist, CV rules, upload steps'],['CV and promotion clinic','Faculty considering promotion','Quarterly · 60 min','1/13/27','School CV format, personal statement, timelines'],['New faculty orientation','New faculty','Monthly · 90 min','12/9','Policies, annual review, promotion paths, contacts'],['Offer letter template refresher','Section administrators','Each July · 30 min','7/27','Template, approvals, common errors']].map(r => `<tr><th scope="row">${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+
+/* Support: sensitive matters */
+const ACC_COLS = ['Chair','Section chief','FA Manager','Section administrator','Search committee'];
+const ACC = [['Evaluator letters','d p d n n'],['Leave details','p p d p n'],['Offer compensation','d d d p n'],['Candidate applications','d p d n d'],['Faculty roster and titles','d d d d p'],['Forecasts and risk flags','d p d n n']];
+const accName = {d:'Full access', p:'Summary only', n:'No access'};
+$('#acc-h').innerHTML = `<tr><th>Record</th>${ACC_COLS.map(c => `<th>${c}</th>`).join('')}</tr>`;
+$('#acc-b').innerHTML = ACC.map(r => `<tr><th scope="row">${r[0]}</th>${r[1].split(' ').map(k => `<td><span class="dot ${k}" role="img" aria-label="${accName[k]}"></span></td>`).join('')}</tr>`).join('');
+$('#sens').innerHTML = ['Confidential letters stay in ADAPT and the restricted folder, never in email threads.','Reports outside the Chair’s Office use faculty IDs, not names.','Leave records show type and dates only. Medical details stay with HR.','Concerns about conduct, bias or conflicts go to the Chair and the right BU office the same day.','Access is reviewed each term and removed when a role changes.'].map(s => `<li>${s}</li>`).join('');
+
+/* Data: activity and data quality */
+const ACT = [['Publications',137,254],['New grants',23,31],['Invited talks',41,57],['Awards and honors',14,12],['National committee roles',31,28]];
+$('#activity').innerHTML = ACT.map(a => { const mx = Math.max(a[1], a[2]); return `<div class="gauge" style="grid-template-columns:150px 1fr 90px"><span>${a[0]}</span><div><div class="t" style="margin-bottom:3px"><i style="width:${a[1] / mx * 100}%;background:var(--slate)"></i></div><div class="t"><i style="width:${a[2] / mx * 100}%;background:var(--line)"></i></div></div><b>${a[1]} <span class="muted" style="font-weight:400">/ ${a[2]}</span></b></div>`; }).join('') + '<div class="legend"><span><i style="background:var(--slate)"></i>This quarter so far</span><span><i style="background:var(--line)"></i>Last quarter</span></div>';
+const DQ = [['Rank and title',100],['Section',100],['Appointment start date',99.4],['Last promotion date',97.1],['Annual review date',92.5],['ORCID linked',86.2]];
+$('#dq').innerHTML = DQ.map(q => `<div class="gauge"><span>${q[0]}</span><div class="t"><i style="width:${q[1]}%;background:${q[1] >= 97 ? 'var(--green)' : q[1] >= 90 ? 'var(--amber)' : 'var(--red)'}"></i></div><b>${q[1]}%</b></div>`).join('');
+$('#dq-note').innerHTML = '<b>So what:</b> missing ORCID IDs slow publication matching. Section administrators collect the 67 missing IDs before annual reviews.';
+
+/* Chair's Office */
+const COV_COLS = ['FA Manager','Chair’s executive assistant','Department administrator','Section administrators'];
+const COV = [['Chair’s calendar and meeting prep','B P - -'],['Chair’s correspondence and signatures','B P - -'],['Faculty searches and candidate visits','P B - -'],['Dossiers and ADAPT uploads','P - B -'],['Offer letters and amendments','P - B -'],['Faculty data and reports','P - B -'],['New faculty onboarding','P - - B']];
+$('#cov-h').innerHTML = `<tr><th>Task</th>${COV_COLS.map(c => `<th>${c}</th>`).join('')}</tr>`;
+$('#cov-b').innerHTML = COV.map(r => `<tr><th scope="row">${r[0]}</th>${r[1].split(' ').map(k => `<td>${k === 'P' ? '<span class="pill-p">P</span>' : k === 'B' ? '<span class="pill-b">B</span>' : ''}</td>`).join('')}</tr>`).join('');
+(function absence() {
+ const A = [['Department administrator','2026-11-25','2026-11-27','FA Manager covers dossier uploads'],['Cardiology section administrator','2026-12-14','2026-12-18','FA Manager covers onboarding for F-2433'],['Chair’s executive assistant','2026-12-21','2026-12-31','FA Manager covers calendar and signatures'],['FA Manager','2026-12-28','2027-01-01','Department administrator covers. F-2041 uploaded by 12/22, before the Cycle 7 internal deadline']];
+ const s0 = d('2026-11-23').getTime(), s1 = d('2027-01-04').getTime(), P = t => ((t - s0) / (s1 - s0) * 100).toFixed(2) + '%';
+ const weeks = Array.from({length: 6}, (_, w) => s0 + w * 7 * DAY);
+ const dl7 = P(d('2026-12-28').getTime());
+ let h = `<div class="abs-row abs-head"><span></span><div class="abs-t">${weeks.map(t => `<span style="left:${P(t)}">${fmt(iso(t)).slice(0, -3)}</span>`).join('')}<span style="left:${dl7};color:var(--accent);font-weight:700;top:16px">Cycle 7 deadline</span></div></div>`;
+ h += A.map(a => `<div class="abs-row"><span><b>${esc(a[0])}</b><small>${esc(a[3])}</small></span><div class="abs-t">${weeks.map(t => `<i class="wk" style="left:${P(t)}"></i>`).join('')}<i class="dl" style="left:${dl7}"></i><i class="bar" style="left:${P(d(a[1]).getTime())};width:calc(${P(d(a[2]).getTime() + DAY)} - ${P(d(a[1]).getTime())});background:${a[0] === 'FA Manager' ? 'var(--accent)' : 'var(--slate)'}"></i></div></div>`).join('');
+ $('#absence').innerHTML = h;
+})();
+const PROJ = [['Faculty headcount by section for the Chair’s retreat','Ad hoc request from the Chair','2026-11-19',100],['Annual faculty awards nominations','Collect, check and route nominations','2027-01-15',60],['Department research day: speaker logistics','Travel, rooms and program','2027-01-29',35],['Annual review form refresh with section chiefs','Draft, feedback, final form','2027-02-01',40],['Roster clean-up before annual reviews','67 missing ORCID IDs','2027-01-31',25]];
+$('#projects').innerHTML = PROJ.map(p => `<div class="proj"><div class="top"><b>${p[0]}</b><small>${p[3] === 100 ? 'Delivered ' + fmt(p[2]) : 'Due ' + fmt(p[2])}</small></div><small>${p[1]}</small><div class="t"><i style="width:${p[3]}%;${p[3] === 100 ? 'background:var(--green)' : ''}"></i></div></div>`).join('');
+
+
+/* ================= V4: GROUPS, PEERS, DEVELOPMENT, COMPLIANCE ================= */
+const PEERS = [
+ ['1 · Recruit & hire','—','Faculty Recruitment & Hiring','Tulane: New Faculty: Offer Letters to Onboarding · Case Western: Orientation, Offer Letters and Templates'],
+ ['2 · Appoint & promote','Faculty Appointments & Promotions','Career Planning & CV Review','Case Western: Appointments, Promotions and Tenure · Michigan: Faculty Affairs'],
+ ['3 · Develop & recognize','Faculty Developments & Events · Faculty & Staff Awards','BUMC and DoM Opportunities · Grants & Awards','Michigan: Faculty Development · Tulane: Career Development and Promotion Guidance'],
+ ['4 · Annual review & compliance','Faculty Annual Review & Compliances · Policies & Procedures','—','Case Western: Annual Performance Reviews · Departure and Leaves of Absence'],
+ ['5 · Faculty data & reporting','AAMC Salary Reports','—','Weill Cornell: official source for faculty data · Case Western: Faculty Information System'],
+ ['6 · Chair’s Office operations','Meetings & Committees · Bylaws','FDD Committee','Department-level work, not usually on school pages']
+];
+$('#peers').innerHTML = PEERS.map(r => `<tr><th scope="row">${esc(r[0])}</th><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('');
+
+const PROG = [['Early career','Instructors and assistant professors in their first five years',18,['Early Career Program','Career Planning & CV Review']],['Mid-career','Assistant professors past five years, associate professors',14,['Mid-Career Program','DoM Coaching Pilot Program']],['Clinician educators','Faculty whose main roles are care and teaching',9,['Clinician Educator Leadership Program']],['New and emerging leaders','New section or program leadership roles',6,['Emerging Leaders Program','BUMC Leadership Program']]];
+const pmax = Math.max(...PROG.map(p => p[2]));
+$('#programs').innerHTML = PROG.map(p => `<div class="prog"><div class="top"><b>${p[0]}</b><span>${p[2]} referrals</span></div><small>${p[1]}</small><div class="t"><i style="width:${p[2] / pmax * 100}%"></i></div><div class="chips2">${p[3].map(c => `<span>${c}</span>`).join('')}</div></div>`).join('') + `<p class="note"><b>So what:</b> the ${READY.reduce((a, r) => a + r[1], 0)} assistant professors past typical time at rank get a Mid-Career or coaching referral before their next annual review.</p>`;
+
+(function awards() {
+ const A = [['Eligible faculty identified',40],['Nominations requested',24],['Nominations received',15],['Packets checked',11],['Submitted',6]];
+ const Wd = 420, rowH = 34, H = A.length * rowH + 6, mx = A[0][1];
+ let s = `<svg viewBox="0 0 ${Wd} ${H}" style="max-width:480px" role="img" aria-label="Awards pipeline funnel from 40 eligible faculty to 6 submitted">`;
+ A.forEach((a, i) => { const w = a[1] / mx * 250, x = 160 + (250 - w) / 2, y = i * rowH + 4;
+  s += `<text x="0" y="${y + 19}" font-size="13">${a[0]}</text><rect x="${x}" y="${y}" width="${w}" height="${rowH - 8}" rx="3" fill="${i === A.length - 1 ? 'var(--accent)' : 'var(--slate)'}" opacity="${1 - i * .1}"/><text x="${160 + 125}" y="${y + 18}" font-size="13" font-weight="700" text-anchor="middle" fill="#fff">${a[1]}</text>`; });
+ $('#awards').innerHTML = s + '</svg>';
+ $('#awards-note').innerHTML = '<b>Next:</b> four packets are checked and waiting on chair letters. School deadline 1/15/27 (synthetic).';
+})();
+
+const ANN = [['Nephrology',100],['Preventive Medicine & Epidemiology',96],['Endocrinology',95],['General Internal Medicine',92],['Biomedical Genetics',90],['Infectious Diseases',88],['Cardiovascular Medicine',85],['Gastroenterology',81],['Pulmonary',78],['Hematology & Medical Oncology',70]];
+$('#annual').innerHTML = ANN.map(a => `<div class="gauge" style="grid-template-columns:220px 1fr 46px"><span>${a[0]}</span><div class="t"><i style="width:${a[1]}%;background:${a[1] >= 90 ? 'var(--green)' : a[1] >= 80 ? 'var(--amber)' : 'var(--red)'}"></i></div><b>${a[1]}%</b></div>`).join('') + '<p class="note"><b>So what:</b> two sections are under 80% booked. Send each section chief a named list this week so every meeting is set before the January window opens.</p>';
+const COMP = [['Annual review meetings not yet booked','Window Jan–Mar 2027',41],['CVs not updated in the last 12 months','Rolling',58],['Outside activity disclosures','Annual, due 1/31',23],['Faculty Checklist trainings overdue','Rolling, school checklist',17],['Clinical licenses or board certifications expiring in 90 days','Rolling',6]];
+const cmx = Math.max(...COMP.map(c => c[2]));
+$('#compliance').innerHTML = COMP.map(c => `<div class="prog"><div class="top"><b>${c[0]}</b><span>${c[2]}</span></div><small>${c[1]}</small><div class="t"><i style="width:${c[2] / cmx * 100}%;background:var(--amber)"></i></div></div>`).join('');
+
+(function aamc() {
+ const R = [['Assistant',48,41],['Associate',52,39],['Professor',55,44]];
+ const Wd = 760, L = 120, Rm = 30, rowH = 50, T = 30, H = T + R.length * rowH + 30, X = p => L + p / 100 * (Wd - L - Rm);
+ let s = `<svg viewBox="0 0 ${Wd} ${H}" style="min-width:620px;max-width:880px" role="img" aria-label="Department median salary percentile against the AAMC benchmark by rank. Unmodified titles sit near the 50th percentile and clinical titles lower at every rank.">`;
+ s += `<rect x="${X(25)}" y="${T - 10}" width="${X(75) - X(25)}" height="${R.length * rowH}" fill="var(--soft)"/>`;
+ [0, 25, 50, 75, 100].forEach(p => s += `<line class="gr" x1="${X(p)}" x2="${X(p)}" y1="${T - 10}" y2="${T + R.length * rowH - 10}"/><text class="lbl" x="${X(p)}" y="${T - 14}" text-anchor="middle">${p === 50 ? 'AAMC median' : p + 'th'}</text>`);
+ s += `<line x1="${X(50)}" x2="${X(50)}" y1="${T - 10}" y2="${T + R.length * rowH - 10}" stroke="var(--ink)" stroke-width="1.5"/>`;
+ R.forEach((r, i) => { const y = T + i * rowH + 15;
+  s += `<text x="0" y="${y + 5}" font-size="14" font-weight="700">${r[0]}</text><line x1="${X(r[2])}" x2="${X(r[1])}" y1="${y}" y2="${y}" stroke="var(--line)" stroke-width="4"/>`;
+  s += `<circle cx="${X(r[1])}" cy="${y}" r="8" fill="var(--accent)"/><text x="${X(r[1]) + 12}" y="${y + 4}" font-size="12.5" font-weight="700">${r[1]}th</text>`;
+  s += `<circle cx="${X(r[2])}" cy="${y}" r="8" fill="var(--slate)"/><text x="${X(r[2]) - 12}" y="${y + 4}" font-size="12.5" font-weight="700" text-anchor="end">${r[2]}th</text>`; });
+ s += `<text class="lbl" x="${X(25)}" y="${H - 6}">Shaded band: 25th to 75th percentile</text></svg>`;
+ $('#aamc').innerHTML = s + '<div class="legend"><span><i style="background:var(--accent)"></i>Unmodified titles</span><span><i style="background:var(--slate)"></i>Clinical titles</span></div>';
+ $('#aamc-note').innerHTML = '<b>So what:</b> clinical-title faculty sit below the AAMC median at every rank. Worth a closer look with the Chair before next year’s offers. Synthetic figures. AAMC salary data is licensed and stays within approved users.';
+})();
+
+const COMM = [['11/24','Department A&P committee','Vote on F-1877. I prepare the packet and the log sheet.'],['12/2','Section chiefs meeting','Annual review bookings and promotion readiness lists.'],['12/9','FDD Committee','Program referrals and the awards pipeline.'],['12/15','Department A&P committee','Cycle 7 dossiers. Packets out 12/10.'],['12/18','S-01 search committee','Final recommendation to the Chair.'],['1/6/27','Department faculty meeting','Promotions and new faculty announcements.'],['1/12/27','Department A&P committee','Cycle 8 dossiers. Letter forecasts reviewed first.']];
+$('#committees').innerHTML = '<div class="comm">' + COMM.map(c => `<div><b>${c[0]}</b><strong>${c[1]}</strong><span>${c[2]}</span></div>`).join('') + '</div>';
+
+/* ================= DIALOG ================= */
+const dlg = $('#dlg'); let opener = null;
+function openDlg(html, trig) { const y = scrollY; $('#dlg-body').innerHTML = html; $('#dlg-body').scrollTop = 0; dlg.scrollTop = 0; opener = trig; if (!dlg.open) dlg.showModal(); window.scrollTo(0, y); }
+function dossierHtml(x) {
+ const c = cyc(x.cycle);
+ const docs = x.type === 'S' ? ['Joint chair letter or secondary chair letter','Log sheet with secondary department vote','Updated BU CV'] : x.rank === 'Instructor' ? DOCS_STD.filter(s => !s.startsWith('Evaluator')) : DOCS_STD;
+ const TH = {'FAP checklist':1,'Personal statement (one page)':2,'BU CV, dated within three months':2,'Updated BU CV':1,'Evaluator list, internal and external':2,'Evaluator solicitation letter':2,'Evaluator letters':3,'Log sheet with department vote':4,'Chair’s cover letter':4,'Joint chair letter or secondary chair letter':4,'Log sheet with secondary department vote':4};
+ const has = w => x.open.some(o => o.includes(w));
+ const isDone = s => x.stage >= 4 ? true : (s.includes('CV') && has('CV')) || (s.includes('statement') && has('statement')) || (s.includes('secondary department') && has('Secondary department')) ? false : s === 'Evaluator letters' ? x.got >= x.need : x.stage >= (TH[s] || 1);
+ const letterRule = x.type === 'S' || x.rank === 'Instructor' ? 'No evaluator letters required.' : /Assistant/.test(x.rank) ? (x.bumg ? 'One letter for BUMG faculty.' : 'Three letters for non-BUMG faculty. Colleagues and mentors are acceptable.') : x.type === 'U' ? 'At least 6 arm’s-length letters from outside universities. Request about 12.' : 'Six letters, three from outside BU. Arm’s-length not required.';
+ const st = STAGES[x.stage];
+ return `<p class="eyebrow">${x.act} · ${typeName[x.type]}</p><h3 id="dlg-title">${x.id} · ${esc(x.rank)}</h3><p class="muted">${esc(x.sec)} · Stage: ${st.n}</p>
+ <dl><dt>Target cycle</dt><dd>Cycle ${x.cycle} · school deadline ${fmt(x.school)} · department ${fmt(x.internal)} · FAP ${fmt(c.fap)}</dd>
+ <dt>Stage clock</dt><dd>${x.inStage} of ${st.t} days · owner: ${st.o}${x.tier >= 0 ? `<br><span class="muted">${TIERS[x.tier].k}: ${TIERS[x.tier].who}. ${TIERS[x.tier].act}.</span>` : ''}</dd>
+ <dt>Letters</dt><dd>${x.need ? `${Math.min(x.got, x.need)} of ${x.need} counted${x.req ? ` · ${x.req} requested` : ''}` : 'None required'}<br><span class="muted">${letterRule}</span></dd>
+ ${x.stage < 4 ? `<dt>Forecast</dt><dd><b style="color:${pcol(x.p)}">${pct(x.p)}</b> chance of making Cycle ${x.cycle}. <button class="linkbtn" data-open="why:${x.id}">Why?</button></dd>` : ''}</dl>
+ <p class="eyebrow" style="margin-top:12px">Dossier checklist</p>
+ <ul class="chk">${docs.map(s => `<li class="${isDone(s) ? '' : 'no'}">${s}${isDone(s) ? '' : ' <span class="muted">· pending</span>'}</li>`).join('')}</ul>
+ ${x.open.length ? `<p class="eyebrow">Open issues</p><ul class="chk">${x.open.map(o => `<li class="no">${esc(o)}</li>`).join('')}</ul>` : ''}
+ <div class="next"><b>Next step:</b> ${esc(x.next)}</div><p style="margin-top:10px"><button class="linkbtn" data-open="fac:${x.id}">Open the faculty record</button></p>`;
+}
+function whyHtml(x) {
+ const mx = Math.max(...x.parts.map(p => Math.abs(p[1])), .5);
+ const sorted = [...x.parts].sort((a, b) => a[1] - b[1]);
+ return `<p class="eyebrow">Forecast explanation</p><h3 id="dlg-title">${x.id}: ${pct(x.p)} chance of making Cycle ${x.cycle}</h3><p class="muted">Each bar shows how much one input moves the forecast. Starting point is the average dossier.</p>
+ <div style="margin-top:12px">${sorted.map(p => { const half = Math.abs(p[1]) / mx * 50; return `<div class="contrib"><span>${p[0]}</span><div class="z"><i style="${p[1] < 0 ? `right:50%;width:${half}%;background:var(--red)` : `left:50%;width:${half}%;background:var(--green)`}"></i></div><b>${p[1] > 0 ? '+' : ''}${p[1].toFixed(2)}</b></div>`; }).join('')}</div>
+ <div class="next"><b>What would change it:</b> ${x.need > x.got ? `each letter received adds about ${Math.round((1 / (1 + Math.exp(-(Math.log(x.p / (1 - x.p)) + .55))) - x.p) * 100)} points. ` : ''}${x.open.length ? `Closing each open document issue adds about ${Math.round((1 / (1 + Math.exp(-(Math.log(x.p / (1 - x.p)) + .7))) - x.p) * 100)} points.` : 'No open document issues.'}</div>
+ <p class="note">Model inputs only describe the dossier’s process status. Nothing about the faculty member’s record is used.</p>`;
+}
+function searchHtml(s) {
+ return `<p class="eyebrow">Faculty search · ${s.id}</p><h3 id="dlg-title">${esc(s.title)}</h3><p class="muted">${esc(s.sub)} · ${esc(s.status)}</p><ul class="chk">${s.ms.map(m => `<li class="${d(m[0]) <= TODAY ? '' : 'no'}">${fmt(m[0])} · ${esc(m[1])}</li>`).join('')}</ul><div class="next"><b>Next step:</b> ${esc(s.next)}</div>`;
+}
+function reqHtml(r) {
+ const p = PATHS[r.k];
+ return `<p class="eyebrow">Faculty request · ${r.id}</p><h3 id="dlg-title">${p.n}</h3><p class="muted">${esc(r.sec)} · received ${fmt(r.rec)} · ${r.age} days open, target ${r.target}</p>
+ <div class="flow" style="margin-top:12px">${p.steps.map(s => `<span style="${s[0] === r.st || r.st.startsWith(s[0]) ? 'background:var(--pale);font-weight:700' : ''}">${s[0]}<small>${s[1]}${s[2] ? ' · ' + s[2] + 'd' : ''}</small></span>`).join('')}</div>
+ <dl><dt>Current step</dt><dd>${esc(r.st)} · ${esc(r.own)}</dd><dt>Escalation</dt><dd>${r.tier >= 0 ? `${TIERS[r.tier].k}: ${TIERS[r.tier].who}. ${TIERS[r.tier].act}.` : 'Within target.'}</dd></dl>`;
+}
+function defHtml(k) {
+ if (k === 'glossary') return `<p class="eyebrow">Glossary</p><h3 id="dlg-title">Terms used in this tracker</h3><dl>${Object.values(DEFS).map(v => `<dt>${v[0]}</dt><dd>${v[1]}</dd>`).join('')}</dl>`;
+ const v = DEFS[k]; return `<p class="eyebrow">Definition</p><h3 id="dlg-title">${v[0]}</h3><p>${v[1]}</p>`;
+}
+function handle(t) {
+ if (t.dataset.close !== undefined) { dlg.close(); return; }
+ if (t.dataset.go) { if (t.dataset.go.includes('#')) { openEvidence(t); return; } if (dlg.open) dlg.close(); show(t.dataset.go); if (t.dataset.sub !== undefined) showSub(t.dataset.go, +t.dataset.sub, false); return; }
+ if (t.dataset.def) { openDlg(defHtml(t.dataset.def), t); return; }
+ const [kind, id] = t.dataset.open.split(':');
+ if (kind === 'go') { if (dlg.open) dlg.close(); show(id); return; }
+ const x = DOS.find(v => v.id === id);
+ if (kind === 'dos') openDlg(dossierHtml(x), t);
+ else if (kind === 'why') openDlg(whyHtml(x), t);
+ else if (kind === 'srch') openDlg(searchHtml(SEARCH.find(v => v.id === id)), t);
+ else if (kind === 'req') openDlg(reqHtml(REQ.find(v => v.id === id)), t);
+ else if (kind === 'cal') { const ev = CAL[+id], R = RING[ev.r]; openDlg(`<p class="eyebrow">${esc(ev.who)} calendar</p><h3 id="dlg-title">${esc(ev.n)}</h3><p class="muted">${ev.e ? fmt(ev.s) + ' to ' + fmt(ev.e) : fmt(ev.s)} · ${esc(ev.src)}</p><div class="next" style="border-left-color:${R.c}">${esc(ev.det)}</div>`, t); }
+ else if (kind === 'fac') openDlg(profileHtml(DOS.find(v => v.id === id)), t);
+ else if (kind === 'ltr') { const l = LTRS[+id]; openDlg(`<p class="eyebrow">Draft correspondence · ${esc(l[1])}</p><h3 id="dlg-title">${esc(l[0])}</h3><div class="draft">${esc(l[2])}</div><p class="note">Template text. Names, dates and details are filled in for each search.</p>`, t); }
+}
+document.addEventListener('click', e => { const t = e.target.closest('[data-open],[data-def],[data-close],[data-go]'); if (t) handle(t); });
+document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('g[data-open],path[data-open],circle[data-open],tr[data-open]')) { e.preventDefault(); handle(e.target); } });
+dlg.addEventListener('click', e => { if (e.target === dlg) { const r = dlg.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dlg.close(); } });
+dlg.addEventListener('close', () => { if (opener && opener.isConnected && opener.focus) opener.focus({preventScroll:true}); });
+
+
+/* ================= V6: SCORECARD, WHEEL, LIFECYCLE, DEPARTMENT, RECORDS ================= */
+const spark = (vals, good) => { const W = 90, H = 26, mn = Math.min(...vals), mx = Math.max(...vals), rg = mx - mn || 1;
+ const pts = vals.map((v, i) => (i / (vals.length - 1) * W).toFixed(1) + ',' + (H - 3 - (v - mn) / rg * (H - 6)).toFixed(1)).join(' ');
+ return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true"><polyline fill="none" stroke="${good ? 'var(--green)' : 'var(--amber)'}" stroke-width="2" points="${pts}"/></svg>`; };
+const within = Math.round(REQ.filter(r => r.ratio < 1).length / REQ.length * 100);
+const dqAvg = +(DQ.reduce((a, q) => a + q[1], 0) / DQ.length).toFixed(1);
+const KPI = [
+ ['k1','Time to fill a search','188 days','≤ 196 days',[214,205,199,192,190,188],true,'Median days from position approval to signed offer.','Search tracker milestones','FA Manager with search chairs'],
+ ['k2','Dossiers made their first target cycle','78%','≥ 85%',[70,72,75,74,77,78],false,'Share of dossiers uploaded complete for the cycle set at the start. Held dossiers count as misses.','Dossier tracker, ADAPT upload dates','FA Manager'],
+ ['k3','Offers checked before the Chair signs','100%','100%',[92,96,100,100,100,100],true,'Share of offer letters and amendments run through the full check before signature.','Offer review log','FA Manager'],
+ ['k4','New faculty fully set up on day one','83%','≥ 90%',[71,74,78,80,82,83],false,'Share of new faculty with IT, EHR access, badge and workspace ready on their first day.','Onboarding tracker','FA Manager with section administrators'],
+ ['k5','CV feedback turnaround','4.2 days','≤ 5 days',[7.1,6.4,5.6,5.0,4.6,4.2],true,'Median business days from CV received to written feedback.','Request log','FA Manager'],
+ ['k6','Faculty requests closed within target',within + '%','≥ 85%',[74,70,66,64,61,within],false,'Share of open and closed requests within their path’s target days.','Request log','FA Manager, escalation ladder'],
+ ['k7','Annual review meetings booked','64%','100% by 12/31',[18,30,41,52,58,64],false,'Share of faculty with a January–March review meeting booked. Reviews cover the prior calendar year.','Annual review form','Section chiefs, FA Manager tracks'],
+ ['k8','Roster fields verified',dqAvg + '%','≥ 98%',[91.2,92.4,93.8,94.6,95.3,dqAvg],false,'Average share of key roster fields complete and checked against the source. Feeds IPEDS and AAMC reporting.','Faculty roster','FA Manager'],
+ ['k9','New faculty retained after 3 years','88%','≥ 85%',[84,85,87,86,88,88],true,'Share of faculty hired three years ago still in the department. Departures are reported by reason only.','HR and roster','Chair, FA Manager reports']
+];
+KPI.forEach(k => { DEFS[k[0]] = [k[1], `${k[6]} Target ${k[3]}. Source: ${k[7]}. Owner: ${k[8]}. Synthetic values for this sample.`]; });
+$('#scorecard').innerHTML = KPI.map(k => `<button class="sc ${k[5] ? 'ok' : 'warn'}" data-def="${k[0]}"><span class="sc-n">${k[1]}</span><strong>${k[2]}</strong><span class="sc-t">Target ${k[3]}</span>${spark(k[4], k[5])}<em>${k[5] ? 'On target' : 'Below target'}</em></button>`).join('');
+
+/* Calendar wheel */
+const AY0 = d('2026-07-01').getTime(), AYN = d('2027-07-01').getTime();
+const CAL = [
+ {r:0,l:0,s:'2026-08-01',e:'2026-10-15',n:'AAMC Faculty Salary Survey fields',who:'University and national',det:'The survey fields each fall. Window shown is based on the prior cycle. The department’s roster and titles must be accurate before the school submits.',src:'AAMC'},
+ {r:0,l:1,s:'2026-11-01',n:'IPEDS Human Resources snapshot date',who:'University and national',det:'IPEDS counts staff, including faculty by rank, as of November 1. Roster accuracy on that date feeds the university’s federal report.',src:'IPEDS'},
+ {r:0,l:0,s:'2026-12-09',e:'2027-04-07',n:'IPEDS spring collection, including Human Resources',who:'University and national',det:'Spring collection closes for keyholders on April 7, 2027. Institutional Research may ask the department to confirm counts.',src:'IPEDS'},
+ {r:0,l:1,s:'2027-01-15',n:'AAMC Faculty Salary Report released (typically January)',who:'University and national',det:'Benchmark used for offers and equity reviews. The school posts Northeast regional tables for faculty affairs use.',src:'AAMC'},
+ {r:1,l:0,s:'2026-07-06',e:'2027-05-05',n:'FAP dossier cycles 1–9',who:'School Faculty Affairs Office',det:'Nine cycles from the first deadline on 7/6/26 to the last letters on 5/5/27.',src:'BU'},
+ ...['2026-08-13','2026-09-03','2026-10-15','2026-11-05','2026-12-03','2027-01-14','2027-02-11','2027-03-11','2027-04-15'].map((x, i) => ({r:1,l:1,s:x,n:'FAP Committee meeting · cycle ' + (i + 1),who:'School Faculty Affairs Office',det:'Executive Committee meets about two weeks later. Letters follow about a week after that.',src:'BU'})),
+ {r:2,l:0,s:'2026-07-01',e:'2026-07-31',n:'New faculty start and orientation',who:'Department',det:'July starts: day-one setup, section welcome and the one-page contacts sheet.',src:'Proposed'},
+ {r:2,l:1,s:'2026-09-15',e:'2026-12-18',n:'Search season: campus visits',who:'Department',det:'Most finalist visits fall here. Itineraries, feedback forms and debriefs.',src:'Synthetic'},
+ {r:2,l:0,s:'2026-10-15',e:'2026-11-01',n:'Roster check before the IPEDS snapshot',who:'Department',det:'Titles, ranks and FTE verified so the November 1 snapshot is right.',src:'Proposed'},
+ {r:2,l:0,s:'2026-12-01',e:'2027-01-15',n:'Awards nominations',who:'Department',det:'Collect, check and route nominations. School deadline 1/15/27 (synthetic).',src:'Synthetic'},
+ {r:2,l:1,s:'2027-01-05',e:'2027-03-31',n:'Annual reviews (covering calendar 2026)',who:'Department',det:'Section chiefs meet each faculty member. The FA Manager tracks bookings, completion and the verification step.',src:'Proposed window'},
+ {r:2,l:0,s:'2027-02-01',e:'2027-03-31',n:'Forecast dossier peak',who:'Department',det:'Workload forecast tops capacity in February and March, the same months as annual reviews.',src:'Forecast'},
+ {r:2,l:0,s:'2027-04-01',e:'2027-06-30',n:'Offers and onboarding for July starts',who:'Department',det:'Offer checks, amendments and pre-arrival steps for the next July cohort.',src:'Proposed'},
+ ...['2026-10-14','2027-01-13','2027-04-14'].map(x => ({r:2,l:1,s:x,n:'CV and promotion clinic',who:'Department',det:'Quarterly, 60 minutes. School CV format, personal statement and timelines.',src:'Proposed'}))
+];
+const RING = [{n:'University and national',r1:248,r2:292,c:'var(--gold)'},{n:'School Faculty Affairs Office',r1:198,r2:242,c:'var(--slate)'},{n:'Department',r1:148,r2:192,c:'var(--accent)'}];
+const ang = t => ((t - AY0) / (AYN - AY0)) * 2 * Math.PI - Math.PI / 2;
+const P2 = (a, r) => [320 + r * Math.cos(a), 320 + r * Math.sin(a)];
+function arc(a0, a1, r1, r2) { const [x0, y0] = P2(a0, r2), [x1, y1] = P2(a1, r2), [x2, y2] = P2(a1, r1), [x3, y3] = P2(a0, r1), lg = a1 - a0 > Math.PI ? 1 : 0;
+ return `M${x0.toFixed(1)} ${y0.toFixed(1)}A${r2} ${r2} 0 ${lg} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}L${x2.toFixed(1)} ${y2.toFixed(1)}A${r1} ${r1} 0 ${lg} 0 ${x3.toFixed(1)} ${y3.toFixed(1)}Z`; }
+(function wheel() {
+ let s = `<svg viewBox="0 0 640 640" role="img" aria-label="Calendar wheel of the academic year July 2026 to June 2027, with university and national reporting, school Faculty Affairs Office cycles and department activities">`;
+ RING.forEach(R => s += `<circle cx="320" cy="320" r="${(R.r1 + R.r2) / 2}" fill="none" stroke="var(--soft)" stroke-width="${R.r2 - R.r1}"/>`);
+ const MN = ['Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun'];
+ MN.forEach((m, i) => { const t = new Date(2026 + (i >= 6 ? 1 : 0), (6 + i) % 12, 1, 12).getTime(), a = ang(t), [x0, y0] = P2(a, 140), [x1, y1] = P2(a, 300), mid = ang(t + 15 * DAY), [tx, ty] = P2(mid, 308);
+  s += `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="var(--line)"/><text x="${tx}" y="${ty + 4}" font-size="13" text-anchor="middle" font-weight="700" fill="var(--muted)">${m}</text>`; });
+ CAL.forEach((ev, i) => { const R = RING[ev.r], half = (R.r2 - R.r1) / 2, r1 = R.r1 + (ev.l ? 0 : half) + 2, r2 = r1 + half - 4;
+  if (ev.e) s += `<path d="${arc(ang(d(ev.s).getTime()), ang(d(ev.e).getTime() + DAY), r1, r2)}" fill="${R.c}" opacity="${ev.src === 'Forecast' ? .55 : .9}" data-open="cal:${i}" tabindex="0" role="button" aria-label="${esc(ev.n)}"><title>${esc(ev.n)}</title></path>`;
+  else { const [cx, cy] = P2(ang(d(ev.s).getTime()), (r1 + r2) / 2); s += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="6.5" fill="var(--paper)" stroke="${R.c}" stroke-width="3" data-open="cal:${i}" tabindex="0" role="button" aria-label="${esc(ev.n)}"><title>${esc(ev.n)}</title></circle>`; } });
+ const at = ang(TODAY.getTime()), [hx, hy] = P2(at, 300), [bx, by] = P2(at, 130);
+ s += `<line x1="${bx}" y1="${by}" x2="${hx}" y2="${hy}" stroke="var(--ink)" stroke-width="2.5"/><circle cx="${hx}" cy="${hy}" r="5" fill="var(--ink)"/>`;
+ s += `<circle cx="320" cy="320" r="128" fill="var(--paper)"/><text x="320" y="292" font-size="13" text-anchor="middle" fill="var(--muted)" font-weight="700">ACADEMIC YEAR</text><text x="320" y="318" font-size="22" text-anchor="middle" font-weight="700">2026–27</text><text x="320" y="344" font-size="13" text-anchor="middle" fill="var(--muted)">Line marks today, 11/20</text>`;
+ RING.forEach((R, i) => s += `<rect x="252" y="${362 + i * 20}" width="12" height="12" rx="2" fill="${R.c}"/><text x="270" y="${372 + i * 20}" font-size="12">${['University, national','School FA Office','Department'][i]}</text>`);
+ $('#wheel').innerHTML = s + '</svg>';
+ const end = TODAY.getTime() + 90 * DAY, items = [];
+ CAL.forEach((ev, i) => { const st = d(ev.s).getTime(), en = ev.e ? d(ev.e).getTime() : st; if (en >= TODAY.getTime() && st <= end) items.push([Math.max(st, TODAY.getTime()), ev, i, st < TODAY.getTime()]); });
+ items.sort((a, b) => a[0] - b[0]);
+ $('#next90').innerHTML = items.map(([t, ev, i, ongoing]) => `<li><button data-open="cal:${i}"><i style="background:${RING[ev.r].c}"></i><b>${ongoing ? 'Now' : fmt(iso(t)).slice(0, -3)}</b><span>${esc(ev.n)}</span></button></li>`).join('');
+ $('#wheel-sowhat').innerHTML = '<b>So what:</b> annual reviews and the dossier peak overlap in February and March, right after the AAMC report lands. Book review meetings in December and move department dossier reviews into January.';
+})();
+
+/* Lifecycle */
+const LIFE = [['Recruit','FA Manager with search chairs','Search path, outreach, visits','hire#gantt,funnels','Recruit & hire'],['Offer and onboard','Chair signs, FA Manager checks','Offer check, day-one setup','hire#offer,onbest','Recruit & hire'],['Annual review','Section chief','Prior calendar year, Jan–Mar','review#annual,compliance','Annual review & compliance'],['Develop','FDD programs, FA Manager refers','BU programs, CV clinic','develop#programs,cvrules','Develop & recognize'],['Appoint and promote','Department A&P, school FAP','ADAPT, nine cycles a year','promote#board','Appoint & promote'],['Recognize','Chair, award committees','Nominations pipeline','develop#awards','Develop & recognize'],['Leaves and support','Chair, HR, FA Manager','Request paths and targets','review#aging,paths','Annual review & compliance'],['Retire or emeritus','Chair letter, Dean approves emeritus','Transition and records','review#paths','Annual review & compliance']];
+$('#life').innerHTML = LIFE.map((s, i) => `<button class="lstep" data-go="${s[3]}" data-title="${esc(s[0])}" data-group="${esc(s[4])}"><b>${i + 1}</b><strong>${s[0]}</strong><span>${s[1]}</span><small>${s[2]}</small></button>`).join('');
+
+/* Department profile */
+$('#facts').innerHTML = [['~500','faculty'],['14','sections'],['15','research centers'],['2','principal teaching hospitals: Boston Medical Center and VA Boston Healthcare System']].map(f => `<div><strong>${f[0]}</strong><span>${f[1]}</span></div>`).join('') + '<p class="note" style="grid-column:1/-1">Missions named by the Chair include outstanding and equal care for all, and health equity, across research, clinical care and education.</p>';
+$('#sections').innerHTML = ['Biomedical Genetics','Cardiovascular Medicine','Computational Biomedicine','Endocrinology, Diabetes, and Nutrition','Gastroenterology','General Internal Medicine','Geriatrics','Hematology and Medical Oncology','Infectious Disease','Nephrology','Preventive Medicine and Epidemiology','Pulmonary, Allergy, Sleep, and Critical Care Medicine','Rheumatology','Vascular Biology'].map(x => `<span>${x}</span>`).join('');
+$('#missions').innerHTML = [['Clinical care','Clinical-title promotions, hospital credentialing in onboarding, clinician educator referrals.'],['Research','Arm’s-length letters on time, publication tracking, physician-scientist searches.'],['Education','Clinician Educator Leadership Program referrals, CV clinics, teaching in personal statements.'],['Equal care for all','Broad outreach in every search, consistent promotion timelines, equal access to development programs.']].map(m => `<div class="mission"><b>${m[0]}</b><span>${m[1]}</span></div>`).join('');
+
+/* Retention */
+const RET = [['Career advancement elsewhere',9],['Retirement',7],['Family or relocation',5],['Compensation',4],['Return to private practice',3],['Other',2]];
+const rtot = RET.reduce((a, r) => a + r[1], 0);
+$('#retention').innerHTML = RET.map(r => `<div class="gauge" style="grid-template-columns:200px 1fr 40px"><span>${r[0]}</span><div class="t"><i style="width:${r[1] / RET[0][1] * 100}%;background:var(--slate)"></i></div><b>${r[1]}</b></div>`).join('') + `<p class="note">${rtot} departures, about ${(rtot / 488 * 100).toFixed(1)}% of faculty (synthetic). <b>So what:</b> career advancement leads, so promotion readiness and leadership programs are the retention levers within reach.</p>`;
+(function ret3() { const Y = [['2019',86],['2020',84],['2021',89],['2022',88],['2023*',92]], Wd = 420, H = 210, L = 34, B = 30, T = 14, X = i => L + 24 + i * ((Wd - L - 80) / (Y.length - 1)), Yv = v => T + (1 - (v - 70) / 30) * (H - T - B);
+ let s = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Share of new faculty retained after three years by hiring year, near 85 to 89 percent">`;
+ [70, 80, 90, 100].forEach(v => s += `<line class="gr" x1="${L}" x2="${Wd - 6}" y1="${Yv(v)}" y2="${Yv(v)}"/><text class="lbl" x="${L - 4}" y="${Yv(v) + 4}" text-anchor="end">${v}%</text>`);
+ s += `<line x1="${L}" x2="${Wd - 6}" y1="${Yv(85)}" y2="${Yv(85)}" stroke="var(--accent)" stroke-dasharray="5 4"/><text x="${Wd - 8}" y="${Yv(85) - 5}" font-size="12" fill="var(--accent)" text-anchor="end">Target 85%</text>`;
+ s += `<polyline fill="none" stroke="var(--slate)" stroke-width="2.5" points="${Y.map((y, i) => X(i) + ',' + Yv(y[1])).join(' ')}"/>`;
+ Y.forEach((y, i) => s += `<circle cx="${X(i)}" cy="${Yv(y[1])}" r="5" fill="${i === Y.length - 1 ? 'var(--paper)' : 'var(--slate)'}" stroke="var(--slate)" stroke-width="2"/><text x="${X(i)}" y="${Yv(y[1]) - 10}" font-size="12.5" font-weight="700" text-anchor="middle">${y[1]}%</text><text class="lbl" x="${X(i)}" y="${H - 10}" text-anchor="middle">${y[0]}</text>`);
+ $('#ret3').innerHTML = s + '</svg><p class="note">Hiring year on the axis. *The 2023 cohort shows two years so far.</p>'; })();
+
+/* Faculty records */
+const CUR = {'Associate Professor':'Assistant Professor','Professor':'Associate Professor','Clinical Associate Professor':'Clinical Assistant Professor','Clinical Professor':'Clinical Associate Professor'};
+const hsh = s => s.split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 9973, 7);
+function profileOf(x) { const h = hsh(x.id);
+ const incoming = x.act === 'Appointment', cur = x.act === 'Promotion' ? CUR[x.rank] : x.type === 'S' ? 'Associate Professor' : x.rank;
+ const yrs = incoming ? 0 : x.act === 'Promotion' ? 6 + h % 5 : 3 + h % 6;
+ const cv = x.cvDate || (incoming ? iso(TODAY.getTime() - (h % 40 + 5) * DAY) : iso(TODAY.getTime() - (h % 80 + 20) * DAY));
+ return {cur: incoming ? 'Incoming · ' + x.rank : cur, yrs, cv, review: incoming ? 'First review after 12 months' : 'Signed for 2025 · ' + ['Feb','Mar','Apr'][h % 3] + ' 2026', pubs: incoming ? '—' : 2 + h % 12, prog: incoming ? 'New faculty orientation' : x.act === 'Promotion' ? (x.type === 'C' ? 'Clinician Educator Leadership Program' : 'Mid-Career Program') : 'Early Career Program', track: typeName[x.type]}; }
+$('#records-b').innerHTML = DOS.map(x => { const p = profileOf(x); return `<tr class="rowbtn" data-open="fac:${x.id}" tabindex="0"><th scope="row">${x.id}</th><td>${esc(x.sec)}</td><td>${esc(p.cur)}</td><td>${p.yrs || '—'}</td><td>${fmt(p.cv)}</td><td>${esc(p.review)}</td><td>${x.open.length ? `<span class="st flag">${x.open.length} open</span>` : `<span class="st pass">${STAGES[x.stage].n}</span>`}</td></tr>`; }).join('');
+function profileHtml(x) { const p = profileOf(x), c = cyc(x.cycle);
+ const steps = [[x.act === 'Appointment' ? 'Offer accepted' : 'Current appointment', x.act === 'Appointment' ? 'Recent' : p.yrs + ' years at rank'], [x.act + ' started', STAGES[0].n], ['Now', STAGES[x.stage].n], ['Target', 'Cycle ' + x.cycle + ' · FAP ' + fmt(c.fap)]];
+ return `<p class="eyebrow">Faculty record · ${x.id}</p><h3 id="dlg-title">${esc(p.cur)}</h3><p class="muted">${esc(x.sec)} · ${esc(p.track)}</p>
+ <dl><dt>Years at rank</dt><dd>${p.yrs || 'New appointment'}</dd><dt>CV dated</dt><dd>${fmt(p.cv)}${x.open.some(o => o.includes('CV')) ? ' <span class="st flag">Refresh before upload</span>' : ''}</dd><dt>Annual review</dt><dd>${esc(p.review)}</dd><dt>Publications</dt><dd>${p.pubs} this fiscal year</dd><dt>Development</dt><dd>${esc(p.prog)}</dd><dt>In progress</dt><dd>${esc(x.act)} to ${esc(x.rank)} · ${STAGES[x.stage].n}${x.stage < 4 ? ` · <b style="color:${pcol(x.p)}">${pct(x.p)}</b> forecast` : ''}</dd></dl>
+ <div class="ptl">${steps.map((s, i) => `<div class="${i === 2 ? 'on' : ''}"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('')}</div>
+ <p style="margin-top:12px"><button class="linkbtn" data-open="dos:${x.id}">Open the dossier</button></p>
+ <p class="note">This record shows what the access rules allow a Faculty Affairs Manager to see. Compensation, leave details and letter content are not shown. Synthetic data.</p>`; }
+
+/* ================= SUB-INDEX AND EVIDENCE POPUPS ================= */
+const SUBS = {
+ overview:[['At a glance',['quad','actions']],['Scorecard',['scorecard']],['Year wheel',['wheel']],['Faculty lifecycle',['life']],['Department profile',['facts']],['Duties in the posting',['dutymap']],['BU and peers',['peers']]],
+ hire:[['Searches',['gantt','funnels']],['Process and change',['rproc']],['Outreach and meetings',['sources']],['Visits and letters',['itin']],['Offers',['offer']],['Onboarding',['onb-h','onbest']]],
+ promote:[['Dossier board',['board']],['Escalation and judgment',['ladder','drafts']],['Readiness checks',['checks']],['Deadline forecast',['probs']],['Letter forecast',['letters']],['FAP calendar',['cycles','workback']]],
+ develop:[['Program referrals',['programs']],['CV check and awards',['cvrules']],['Training',['training']]],
+ review:[['Annual review and compliance',['annual']],['Faculty requests',['aging','paths']],['Confidential records',['acc-h']]],
+ data:[['Faculty profile',['ranks','pubs']],['Faculty records',['records']],['Activity and data quality',['activity']],['Retention',['retention']],['AAMC benchmark',['aamc']]],
+ ops:[['Coverage',['cov-h']],['Absences and projects',['absence']],['Committees',['committees']],['Workload forecast',['workload']]]
+};
+$$('.grp').forEach(h => h.remove());
+Object.entries(SUBS).forEach(([pid, subs]) => {
+ const panel = document.getElementById(pid); if (!panel) return;
+ let last = null; const pending = [];
+ [...panel.children].forEach(c => {
+  if (c.matches('.ph,.peers,.takeaways,.kpis')) return;
+  const ids = [...c.querySelectorAll('[id]')].map(e => e.id).concat(c.id ? [c.id] : []);
+  const k = subs.findIndex(sb => sb[1].some(i => ids.includes(i)));
+  if (k >= 0) { last = k; c.dataset.sub = k; pending.splice(0).forEach(p => p.dataset.sub = k); }
+  else if (c.matches('.rai')) pending.push(c);
+  else if (last !== null) c.dataset.sub = last;
+ });
+ const nav = document.createElement('div'); nav.className = 'subnav'; nav.dataset.panel = pid; nav.setAttribute('role', 'tablist'); nav.setAttribute('aria-label', 'Sections in this tab');
+ const gnum = GROUPS.findIndex(g => g[0] === pid) + 1;
+ nav.innerHTML = `<span class="sublab">${gnum ? gnum + ' · ' + esc(GROUPS[gnum - 1][1]) : 'Overview'}</span>` + subs.map((sb, i) => `<button role="tab" data-sub="${i}" aria-selected="${i === 0}"><b>${gnum ? gnum + '.' + (i + 1) : i + 1}</b>${esc(sb[0])}</button>`).join('');
+ nav.hidden = pid !== 'overview';
+ $('#subbar').appendChild(nav);
+ nav.addEventListener('click', e => { const b = e.target.closest('button[data-sub]'); if (b) showSub(pid, +b.dataset.sub, true); });
+ showSub(pid, 0, false);
+});
+function showSub(pid, k, user) {
+ const panel = document.getElementById(pid), nav = document.querySelector(`.subnav[data-panel="${pid}"]`);
+ nav.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', +b.dataset.sub === k));
+ panel.querySelectorAll('[data-sub]').forEach(c => { if (c.parentElement === panel) c.hidden = +c.dataset.sub !== k; });
+ if (pid === 'hire' && k === 0) requestAnimationFrame(placeToday);
+ if (user) { const ph = panel.querySelector('.ph') || panel.firstElementChild, top = ph.getBoundingClientRect().top + scrollY - stickH() - 8; if (scrollY > top) window.scrollTo({top, behavior:'instant'}); }
+}
+function stickH() { return $('.tabs').offsetHeight; }
+function setStick() { document.documentElement.style.setProperty('--tabs-h', stickH() + 'px'); }
+setStick(); addEventListener('resize', setStick);
+
+function openEvidence(t) {
+ const [tab, list] = t.dataset.go.split('#');
+ const ids = list.split(','), seen = new Set(), blocks = [];
+ ids.forEach(id => { const el = document.getElementById(id); if (!el) return; const box = el.closest('.card') || el.closest('.board,.cyc') || el; if (!seen.has(box)) { seen.add(box); blocks.push(box); } });
+ const html = blocks.map(b => { const c = b.cloneNode(true); c.removeAttribute('id'); c.querySelectorAll('[id]').forEach(e => e.removeAttribute('id')); c.querySelectorAll('.today').forEach(e => e.remove()); c.hidden = false; c.classList.remove('mt'); return c.outerHTML; }).join('');
+ const title = t.dataset.title || (blocks[0] && blocks[0].querySelector('h3') ? blocks[0].querySelector('h3').textContent : '');
+ const grp = t.dataset.group || (GROUPS.find(g => g[0] === tab) || ['', ''])[1];
+ const subIdx = (SUBS[tab] || []).findIndex(sb => sb[1].some(i => ids.includes(i)));
+ dlg.classList.add('wide');
+ openDlg(`<p class="eyebrow">${esc(grp)} · evidence</p><h3 id="dlg-title">${esc(title)}</h3><div class="evidence">${html}</div><p style="margin-top:14px"><button class="linkbtn" data-go="${tab}" data-sub="${subIdx < 0 ? 0 : subIdx}">Open this in the ${esc(grp)} tab</button></p>`, t);
+}
+dlg.addEventListener('close', () => dlg.classList.remove('wide'));
+$('#index-btn').addEventListener('click', e => { e.stopPropagation(); const blocks = [['overview','Overview']].concat(GROUPS).map(([pid, name], gi) => `<div class="ixg"><button class="ixh" data-go="${pid}" data-sub="0">${gi ? '<b>' + gi + '</b>' : ''}${esc(name)}</button><ol>${SUBS[pid].map((sb, k) => `<li><button data-go="${pid}" data-sub="${k}"><span>${gi ? gi + '.' + (k + 1) : k + 1}</span>${esc(sb[0])}</button></li>`).join('')}</ol></div>`).join(''); dlg.classList.add('wide'); openDlg(`<p class="eyebrow">Index</p><h3 id="dlg-title">Every tab and section</h3><div class="ixgrid">${blocks}</div>`, e.currentTarget); });
+
+/* ================= TABS ================= */
+const tabs = $$('.tab');
+function show(id, push = true) {
+ tabs.forEach(t => { const on = t.getAttribute('aria-controls') === id; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; });
+ $$('.panel').forEach(p => p.classList.toggle('on', p.id === id));
+ $$('#subbar .subnav').forEach(n => n.hidden = n.dataset.panel !== id); setStick();
+ if (push) { try { history.replaceState(null, '', '#' + id); } catch (e) {} }
+ if (id === 'hire') requestAnimationFrame(placeToday);
+ window.scrollTo({top: 0});
+}
+tabs.forEach((t, i) => {
+ t.addEventListener('click', () => show(t.getAttribute('aria-controls')));
+ t.addEventListener('keydown', e => { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); show(n.getAttribute('aria-controls')); });
+});
+addEventListener('resize', placeToday);
+addEventListener('beforeprint', () => $$('.panel').forEach(p => p.style.display = 'block'));
+addEventListener('afterprint', () => $$('.panel').forEach(p => p.style.display = ''));
+const start = location.hash.slice(1);
+if ($$('.panel').some(p => p.id === start)) show(start, false);
+window.__BU = {DOS, LET, LATE, FC, REQ};
+})();
+
+/* inside the career profile popup, the profile link is redundant */
+try{if(window.top!==window.self){document.querySelectorAll('.cp-link').forEach(a=>{a.hidden=true;const br=a.previousElementSibling;if(br&&br.tagName==='BR')br.hidden=true;});}}catch(e){}
+
+</script>
+</body>
+</html>
